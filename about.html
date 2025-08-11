@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Me | My Digital Portfolio</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav" aria-label="Main navigation">
+      <a class="logo" href="index.html">Tristin <span>ꉂ(˵˃ ᗜ ˂˵)</span></a>
+      <button id="navToggle" class="nav__toggle" aria-expanded="false" aria-controls="navMenu">☰</button>
+      <ul id="navMenu" class="nav__menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="art-projects.html">Projects</a></li>
+        <li><a href="code-projects.html">Hobbies</a></li>
+        <li><a href="about.html" class="active">About me!</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main class="page about">
+    <header class="about__header">
+      <h1 class="page-title">About Me</h1>
+      <p class="page-intro">A snapshot of my journey, interests, and what drives me.</p>
+    </header>
+    <section class="about__grid">
+      <article class="about__section">
+        <h2>Who I Am</h2>
+        <p>HI!! Im tristin (˶' ꒳ '˶). 
+        </p>
+      </article>
+      <article class="about__section">
+        <h2>Education</h2>
+        <ul class="timeline" id="educationTimeline"></ul>
+      </article>
+      <article class="about__section">
+        <h2>Skills</h2>
+        <div class="skills-toolbar">
+          <div id="skillsDots" class="skills-dots" aria-label="Select skills category"></div>
+        </div>
+        <div id="skillGroups"></div>
+      </article>
+      <article class="about__section">
+        <h2>Interests</h2>
+        <p>As a person I love personalizing everything i do with creativity and a touch of whimsy. I enjoy listening and playing music in my spare time; Crochetting my design ideas to life freehanded; And ofcourse coding! <br><br> FUNFACT!!! <br>This website is heavily inspired on the old Myspace mid 200s era customisation UI.</p>
+      </article>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <section class="contact-footer">
+      <a class="btn primary" href="mailto:you@example.com?subject=Portfolio%20Inquiry&body=Hi%20Tristin%2C%0D%0A%0D%0AMy%20name%20is%20...%0D%0AI%27d%20like%20to%20talk%20about%20...%0D%0A%0D%0AThanks!" aria-label="Email me">
+        <span aria-hidden="true">✉️</span>
+        <span>Email me</span>
+      </a>
+      <div class="social-links icon-row">
+        <a class="icon-link" href="https://github.com/mylittleponyfan06" target="_blank" rel="noopener" aria-label="GitHub profile">
+          <img src="assets/images/github-mark-white.png" alt="" aria-hidden="true" />
+          <span class="tooltip">GitHub</span>
+          <span class="sr-only">GitHub</span>
+        </a>
+        <a class="icon-link" href="https://www.linkedin.com/in/your-handle" target="_blank" rel="noopener" aria-label="LinkedIn profile">
+          <img src="assets/images/linkedin_logo.png" alt="" aria-hidden="true" />
+          <span class="tooltip">LinkedIn</span>
+          <span class="sr-only">LinkedIn</span>
+        </a>
+        <a class="icon-link" href="https://t.me/geeklord88" target="_blank" rel="noopener" aria-label="Message me on Telegram">
+          <img src="assets/images/tele_trans_white.webp" alt="" aria-hidden="true" />
+          <span class="tooltip">Telegram</span>
+          <span class="sr-only">Telegram</span>
+        </a>
+      </div>
+    </section>
+  </footer>
+  <script type="module" src="assets/js/about.js"></script>
+</body>
+</html>

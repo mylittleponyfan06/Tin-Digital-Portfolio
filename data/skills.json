@@ -1,0 +1,29 @@
+{
+  "technical": {
+  "Frontend Development": ["HTML", "CSS", "JavaScript", "React.js", "Vite (React)", "Jinja"],
+  "Backend Development": ["Node.js", "Python", "Flask", "C#"],
+  "Database Management": ["MySQL", "CloudTiDB"],
+  "Tools & Version Control": ["GitHub"],
+  "Cloud & AI": ["Amazon Web Service (AWS)", "GenAI"]
+  },
+  "soft": [
+    "Communication skills",
+    "Teamwork & Collaboration",
+    "Time management",
+    "Adaptability",
+    "Multilingual fluency",
+    "Problem-solving",
+    "Attention to detail",
+    "Customer Service"
+  ],
+  "hobby": [
+    "Guitar",
+    "Bass",
+    "Crochet",
+    "Sewing",
+    "Baking",
+    "Barista",
+    "Gig Performance",
+    "Guitar pedal Software modding"
+  ]
+}

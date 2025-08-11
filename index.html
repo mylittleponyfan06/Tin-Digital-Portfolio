@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tristin Sim!!</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav" aria-label="Main navigation">
+      <a class="logo" href="index.html">Tristin <span>ꉂ(˵˃ ᗜ ˂˵)</span></a>
+      <button id="navToggle" class="nav__toggle" aria-expanded="false" aria-controls="navMenu">☰</button>
+      <ul id="navMenu" class="nav__menu">
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="art-projects.html">Projects</a></li>
+        <li><a href="code-projects.html">Hobbies</a></li>
+        <li><a href="about.html">About me!</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <section class="hero">
+      <div class="hero__content">
+        <h1>Hello!! I'm <span class="accent" id="yourName">Tristin</span></h1>
+        <p class="lead">Creative tinkerer, musician, and aspiring developer. This is a showcase of the things I build, play, and learn.</p>
+        <div class="hero__actions">
+          <a href="art-projects.html" class="btn primary">Explore my Projects</a>
+          <a href="code-projects.html" class="btn outline">See my hobbies</a>
+        </div>
+      </div>
+    </section>
+    <section class="featured" id="featuredProjects">
+      <h2 class="section-title">Featured Items</h2>
+      <div class="cards" id="featuredCards" aria-live="polite"></div>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <section class="contact-footer">
+      <a class="btn primary" href="mailto:you@example.com?subject=Portfolio%20Inquiry&body=Hi%20Tristin%2C%0D%0A%0D%0AMy%20name%20is%20...%0D%0AI%27d%20like%20to%20talk%20about%20...%0D%0A%0D%0AThanks!" aria-label="Email me">
+        <span>Email me</span>
+      </a>
+      <div class="social-links icon-row">
+        <a class="icon-link" href="https://github.com/mylittleponyfan06" target="_blank" rel="noopener" aria-label="GitHub profile">
+          <img src="assets/images/github-mark-white.png" alt="" aria-hidden="true" />
+          <span class="tooltip">GitHub</span>
+          <span class="sr-only">GitHub</span>
+        </a>
+        <a class="icon-link" href="https://www.linkedin.com/in/your-handle" target="_blank" rel="noopener" aria-label="LinkedIn profile">
+          <img src="assets/images/linkedin_logo.png" alt="" aria-hidden="true" />
+          <span class="tooltip">LinkedIn</span>
+          <span class="sr-only">LinkedIn</span>
+        </a>
+        <a class="icon-link" href="https://t.me/geeklord88" target="_blank" rel="noopener" aria-label="Message me on Telegram">
+          <img src="assets/images/tele_trans_white.webp" alt="" aria-hidden="true" />
+          <span class="tooltip">Telegram</span>
+          <span class="sr-only">Telegram</span>
+        </a>
+      </div>
+    </section>
+  </footer>
+  <script src="assets/js/main.js" type="module"></script>
+</body>
+</html>

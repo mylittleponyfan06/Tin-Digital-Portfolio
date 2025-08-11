@@ -1,0 +1,53 @@
+[
+  {
+    "title": "Lynkistry",
+    "subtitle": "Full-stack web application in collaboration with Singapore Chinese Chamber of Commerce and Industry (SCCCI) member companies in the insurance and finance sector.",
+    "tags": ["FSDP", "Coding", "GenAI", "CloudTiDB", "AWS", "GitHub"],
+    "featured": true,
+    "image": "assets/images/Lynkistrylogo.png",
+    "links": { "github": "https://github.com/RKaiWut/Lynkistry" }
+  },
+  {
+    "title": "Pedalboard Layout",
+    "subtitle": "<b>Signal chain for live set</b> <br><br> <b>Case:</b> Stagg Pedalboard <br> <b>Power supply:</b> Mosky<br> <b>Fuzz:</b> Pop pedal Fuzz <br> <b>Compressor:</b> Effects Bakery Plain Bread Compressor  <br> <b>Multi-effects:</b> Zoom MS-50g",
+    "tags": ["Guitar", "equipment", "collection"],
+    "featured": false,
+    "image": "assets/images/pedalboard.jpg",
+    "equipment": [
+      {
+        "img": "assets/images/pedalboard.jpg",
+        "title": "Pedalboard Overview",
+        "desc": "Stagg Pedalboard loaded with all gig essentials."
+      },
+      {
+        "img": "assets/images/mosky_power.jpg",
+        "title": "Power Supply",
+        "desc": "Mosky power supply for stable, noise-free operation."
+      },
+      {
+        "img": "assets/images/pop_fuzz.jpg",
+        "title": "Fuzz Pedal",
+        "desc": "Pop pedal Fuzz for classic distortion tones."
+      },
+      {
+        "img": "assets/images/effects_bakery.jpg",
+        "title": "Compressor",
+        "desc": "Effects Bakery Plain Bread Compressor for smooth dynamics."
+      },
+      {
+        "img": "assets/images/zoom_ms50g.jpg",
+        "title": "Multi-effects",
+        "desc": "Zoom MS-50g for versatile effects in one box."
+      }
+    ],
+    "links": { "pedal": "https://github.com/RKaiWut/Lynkistry" }
+  },
+  {
+    "title": "Indie band: Keith",
+    "subtitle": "Live gig performances with my band <b>\"Keith\"</b>! <br> Comprising of Nanyang Poly students from the schools: Information Technology, Engingeering, and Nursing.",
+    "tags": ["gig", "live", "Guitar"],
+    "featured": true,
+    "image": "assets/images/keith_cover.jpg",
+    "links": { "BMOS": "https://youtube.com" }
+  }
+]

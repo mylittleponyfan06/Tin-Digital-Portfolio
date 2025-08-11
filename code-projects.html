@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hobbies| My Digital Portfolio</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav" aria-label="Main navigation">
+      <a class="logo" href="index.html">Tristin <span>ꉂ(˵˃ ᗜ ˂˵)</span></a>
+      <button id="navToggle" class="nav__toggle" aria-expanded="false" aria-controls="navMenu">☰</button>
+      <ul id="navMenu" class="nav__menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="art-projects.html">Projects</a></li>
+        <li><a href="code-projects.html" class="active">Hobbies</a></li>
+        <li><a href="about.html">About me!</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main class="page">
+    <h1 class="page-title">My hobbies!</h1>
+    <p class="page-intro">From gigs performances to PC building and upgrading.</p>
+  <div class="filters" id="codeFilters"></div>
+  <input id="codeSearchInput" class="search-input" type="text" placeholder="Search by tag or keyword..." style="display:none; margin-top:0.7rem; width:100%; max-width:320px; padding:0.5rem 1rem; border-radius:8px; border:1px solid #222; background:#181b25; color:#fff; font-size:1rem;" />
+    <div class="cards" id="codeProjectCards" aria-live="polite"></div>
+  </main>
+  <footer class="site-footer">
+    <section class="contact-footer">
+      <a class="btn primary" href="mailto:you@example.com?subject=Portfolio%20Inquiry&body=Hi%20Tristin%2C%0D%0A%0D%0AMy%20name%20is%20...%0D%0AI%27d%20like%20to%20talk%20about%20...%0D%0A%0D%0AThanks!" aria-label="Email me">
+        <span aria-hidden="true">✉️</span>
+        <span>Email me</span>
+      </a>
+      <div class="social-links icon-row">
+        <a class="icon-link" href="https://github.com/mylittleponyfan06" target="_blank" rel="noopener" aria-label="GitHub profile">
+          <img src="assets/images/github-mark-white.png" alt="" aria-hidden="true" />
+          <span class="tooltip">GitHub</span>
+          <span class="sr-only">GitHub</span>
+        </a>
+        <a class="icon-link" href="https://www.linkedin.com/in/your-handle" target="_blank" rel="noopener" aria-label="LinkedIn profile">
+          <img src="assets/images/linkedin_logo.png" alt="" aria-hidden="true" />
+          <span class="tooltip">LinkedIn</span>
+          <span class="sr-only">LinkedIn</span>
+        </a>
+        <a class="icon-link" href="https://t.me/geeklord88" target="_blank" rel="noopener" aria-label="Message me on Telegram">
+          <img src="assets/images/tele_trans_white.webp" alt="" aria-hidden="true" />
+          <span class="tooltip">Telegram</span>
+          <span class="sr-only">Telegram</span>
+        </a>
+      </div>
+    </section>
+  </footer>
+  <script type="module" src="assets/js/code.js"></script>
+</body>
+</html>
