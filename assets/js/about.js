@@ -6,8 +6,8 @@ applyYear();
 (async () => {
   try {
     const [education, skills] = await Promise.all([
-      loadJSON('../data/education.json'),
-      loadJSON('../data/skills.json')
+      loadJSON('data/education.json'),
+      loadJSON('data/skills.json')
     ]);
 
     const eduList = document.getElementById('educationTimeline');

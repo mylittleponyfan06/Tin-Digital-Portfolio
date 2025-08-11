@@ -7,8 +7,8 @@ applyYear();
 (async () => {
   try {
     const [art, code] = await Promise.all([
-      loadJSON('../data/art-projects.json'),
-      loadJSON('../data/code-projects.json')
+      loadJSON('data/art-projects.json'),
+      loadJSON('data/code-projects.json')
     ]);
     const featured = [...art, ...code].filter(p => p.featured).slice(0, 6);
     renderProjectCards(featured, document.getElementById('featuredCards'));
