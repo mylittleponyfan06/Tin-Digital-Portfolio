@@ -3,9 +3,10 @@ import { loadJSON, renderProjectCards, applyYear, initFilters, initNavToggle } f
 initNavToggle();
 applyYear();
 
+// Use correct path for GitHub Pages
 (async () => {
   try {
-    const code = await loadJSON('../data/code-projects.json');
+    const code = await loadJSON('data/code-projects.json');
     const container = document.getElementById('codeProjectCards');
     renderProjectCards(code, container);
     const tagSet = new Set();
