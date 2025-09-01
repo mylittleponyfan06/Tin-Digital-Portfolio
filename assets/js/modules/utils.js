@@ -35,7 +35,7 @@ export function renderProjectCards(projects, container) {
           ${p.links?.github ? `<a class="btn outline" target="_blank" rel="noopener" href="${p.links.github}">GitHub</a>` : ''}
           ${p.links?.BMOS ? `<a class="btn outline" target="_blank" rel="noopener" href="${p.links.BMOS}">BMOS gig recording</a>` : ''}
           ${p.links?.readMore ? `<a class="btn" href="${p.links.readMore}">Read</a>` : ''}
-          ${p.links?.Rainmeter ? `<a class="btn outline" target="_blank" rel="noopener" href="${p.links.rainmeter}">Download here!</a>` : ''}
+          ${p.links?.Rainmeter ? `<a class="btn outline" target="_blank" rel="noopener" href="${p.links.rainmeter}">View/Download here!</a>` : ''}
           ${isPedalboard ? `<button class="btn outline equipment-specs-btn" data-equipment='${JSON.stringify(p.equipment)}'>Equipment Specs</button>` : ''}
         </div>
       </article>
