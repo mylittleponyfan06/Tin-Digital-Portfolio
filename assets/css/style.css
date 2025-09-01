@@ -65,7 +65,7 @@
   font-family: 'Inter', system-ui, sans-serif;
 }
 * { box-sizing: border-box; }
-html, body { margin:0; padding:0; background: var(--bg); color: var(--text); }
+html, body { margin:0; padding:0; background: var(--bg); color: var(--text); min-height:100vh; }
 body { line-height:1.5; -webkit-font-smoothing: antialiased; }
 body {
   /* subtle melon + cherry confetti */
@@ -73,6 +73,22 @@ body {
     radial-gradient(circle at 10px 10px, #b6e2a133 1.5px, transparent 2px),
     radial-gradient(circle at 30px 25px, #ffb7c533 1.5px, transparent 2px);
   background-size: 40px 40px, 60px 60px;
+}
+
+/* Non-repeating, full-viewport illustration background */
+body.has-illustration {
+  background-image: url('../images/portfoliowallpaper.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;      /* stretches to bottom of the screen */
+  background-position: top center;
+}
+
+/* Optional: provide a mobile-specific image later if needed */
+
+@media (min-width: 701px) {
+  body.has-illustration {
+    background-attachment: fixed; /* subtle parallax on desktop */
+  }
 }
 img { max-width:100%; display:block; }
 a { color: var(--accent); text-decoration:none; }
