@@ -19,6 +19,16 @@ applyYear();
         <span>${item.place}</span>
       </li>`).join('');
 
+    // Inject dynamic age line under "Who I Am"
+    const who = document.getElementById('whoAmIInfo');
+    if (who) {
+      const now = new Date();
+      const birthYear = 2006;
+      // Age as of current year; if you want exact by birthday, we can add month/day later
+      const age = now.getFullYear() - birthYear;
+      who.textContent = `HI!! I am Tristin (˶' ꒳ '˶). I'm ${age} this year, this website uses no online templates and was started from scratch!! ^____^`;
+    }
+
   const skillGroupsEl = document.getElementById('skillGroups');
   // Optional logo mapping for popular technologies (uses Devicon via jsDelivr)
   const ICONS = {
