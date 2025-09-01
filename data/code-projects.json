@@ -4,8 +4,7 @@
     "subtitle": " Nanyang Polytechnic - <b>Crew Studio CCA</b> <br><br> carnival event to showcase CCA group.",
     "tags": ["NYP", "performance", "Crew Studio", "Guitar", "CCA"],
     "featured": true,
-    "image": "assets/images/placeholder-code.jpg",
-    "links": { "github": "#", "demo": "#" }
+    "image": "assets/images/placeholder-code.jpg"
   },
   {
     "title": "Fright Night 2024",
