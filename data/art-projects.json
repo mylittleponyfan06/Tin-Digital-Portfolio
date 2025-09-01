@@ -2,7 +2,7 @@
   {
     "title": "Computer Performance Display",
     "subtitle": "Rainmeter asset to display computer specs! <br> -========- <br> Utilises HWiNFO to read GPU + RAM usage and GPU Temp <br><br> Dynamic and interactive interface, Pochitchi's sprite changes depending on GPU temperature and if you click on him. (in-site demo simulation coming soon)",
-    "tags": ["Coding"],
+    "tags": ["Coding", "GitHub"],
     "featured": true,
     "image": "assets/images/potchion.png", 
     "links": { "Rainmeter": "https://github.com/mylittleponyfan06/pochitchi-rainmeter.git" }
@@ -55,7 +55,7 @@
     "subtitle": "Live gig performances with my band <b>\"Keith\"</b>! <br> Comprising of Nanyang Poly students from the schools: Information Technology, Engingeering, and Nursing.",
     "tags": ["gig", "live", "Guitar"],
     "featured": true,
-    "image": "assets/images/keith_cover.jpg",
+    "image": "assets/images/Keith_cover.jpg",
     "links": { "BMOS": "https://youtu.be/cYLIr5dLnrY" }
   }
 ]

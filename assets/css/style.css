@@ -165,12 +165,12 @@ a:hover { text-decoration:underline; color:#e75480; }
 main { max-width:1100px; margin:0 auto; padding:2.5rem 1.2rem 4rem; }
 .hero { padding:5rem 0 3rem; display:grid; place-items:center; text-align:center; }
 .hero__content { max-width:760px; }
-.hero h1 { font-size:clamp(2.25rem,6vw,3.5rem); line-height:1.1; margin:0 0 1rem; }
+.hero h1 { font-size:clamp(2.25rem,6vw,3.5rem); line-height:1.1; margin:0 0 1rem; position:relative; display:inline-block; }
 .hero .accent { background:var(--accent-grad); -webkit-background-clip:text; background-clip:text; color:transparent; }
 .lead { font-size:1.1rem; color:var(--text-dim); margin:0 0 1.75rem; }
 .hero__actions { display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; }
 
-.section-title, .page-title { font-size:2rem; margin:0 0 1rem; position:relative; }
+.section-title, .page-title { font-size:2rem; margin:0 0 1rem; position:relative; display:inline-block; z-index:0; }
 .section-title::before, .page-title::before {
   content: "";
   position:absolute;
@@ -183,6 +183,41 @@ main { max-width:1100px; margin:0 auto; padding:2.5rem 1.2rem 4rem; }
 }
 .section-title.clover::before { background-image:url('../images/clover.svg'); }
 .page-intro { color:var(--text-dim); margin-top:0; }
+
+/* Readability helpers: improve contrast over busy wallpapers without dimming bg */
+/* Utility you can add to any element: class="readsafe" or "readsafe-strong" */
+.readsafe { text-shadow: -1px 0 var(--bg), 1px 0 var(--bg), 0 1px var(--bg), 0 -1px var(--bg), 0 0 8px rgba(255,251,233,.55); }
+.readsafe-strong { text-shadow: -1.2px 0 var(--bg), 1.2px 0 var(--bg), 0 1.2px var(--bg), 0 -1.2px var(--bg), 0 0 10px rgba(255,251,233,.6); }
+/* Apply a subtle halo to key texts when a wallpaper is present */
+body.has-illustration .page-title,
+body.has-illustration .section-title,
+body.has-illustration .hero h1 {
+  /* Centered glow + subtle under shadow for readability */
+  text-shadow:
+    0 0 10px rgba(255, 251, 233, .88),
+    0 0 18px rgba(255, 251, 233, .65),
+    0 2px 3px rgba(124, 74, 45, .30);
+  -webkit-text-stroke: 0; /* no inner stroke */
+}
+body.has-illustration .page-intro,
+body.has-illustration .lead {
+  text-shadow:
+    0 0 8px rgba(255, 251, 233, .75),
+    0 0 14px rgba(255, 251, 233, .55);
+}
+
+/* Soft cream plate behind titles to boost legibility without dimming the page */
+/* Removed heavy background plate for cleaner look */
+
+/* Keep gradient text for highlighted name inside hero heading */
+body.has-illustration .hero h1 .accent {
+  -webkit-text-stroke: 0;             /* cancel parent stroke */
+  text-shadow: none;                  /* cancel parent halo */
+  background: var(--accent-grad);     /* ensure gradient */
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
 
 /* Buttons */
 .btn { --btn-bg: var(--bg-alt); position:relative; display:inline-flex; align-items:center; gap:.5rem; font-weight:600; padding:0.85rem 1.4rem; border-radius:999px; border:1px solid #ffb7c5; color:var(--text); text-decoration:none; font-size:.95rem; transition:.25s background, .25s transform; background:var(--bg-alt); }
