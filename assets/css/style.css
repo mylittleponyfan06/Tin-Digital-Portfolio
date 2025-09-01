@@ -40,8 +40,8 @@
 /* Equipment Modal */
 .equipment-modal { position:fixed; inset:0; z-index:9999; display:none; }
 .equipment-modal.show { display:block; }
-.equipment-modal__overlay { position:absolute; inset:0; background:rgba(255, 183, 197, 0.45); backdrop-filter:blur(2px); }
-.equipment-modal__content { position:absolute; top:50%; right:6vw; transform:translateY(-50%); background:#fffbe9; border-radius:18px; box-shadow:0 8px 32px #ffb7c533; padding:2.2rem 2.2rem 1.7rem; min-width:320px; max-width:370px; width:100%; display:flex; flex-direction:column; align-items:center; animation:modalIn .18s cubic-bezier(.6,1.5,.5,1) both; }
+.equipment-modal__overlay { position:absolute; inset:0; background:rgba(255, 183, 197, 0.3); -webkit-backdrop-filter:blur(3px); backdrop-filter:blur(3px); }
+.equipment-modal__content { position:absolute; top:50%; right:6vw; transform:translateY(-50%); background:rgba(255, 251, 233, 0.62); -webkit-backdrop-filter:blur(9px); backdrop-filter:blur(9px); border-radius:18px; box-shadow:0 8px 32px #ffb7c533; padding:2.2rem 2.2rem 1.7rem; min-width:320px; max-width:370px; width:100%; display:flex; flex-direction:column; align-items:center; animation:modalIn .18s cubic-bezier(.6,1.5,.5,1) both; }
 .equipment-modal__close { position:absolute; top:1.1rem; right:1.2rem; background:none; border:none; color:#e75480; font-size:1.7rem; cursor:pointer; transition:.2s color; }
 .equipment-modal__close:hover { color:#ffb7c5; }
 .equipment-carousel { display:flex; align-items:center; gap:1.1rem; }
@@ -81,6 +81,11 @@ body.has-illustration {
   background-repeat: no-repeat;
   background-size: cover;      /* stretches to bottom of the screen */
   background-position: top center;
+}
+
+/* Art page wants the JPG version specifically */
+body.has-illustration.art-bg {
+  background-image: url('../images/projectpage.jpg');
 }
 
 /* Optional: provide a mobile-specific image later if needed */
@@ -144,7 +149,7 @@ main { max-width:1100px; margin:0 auto; padding:2.5rem 1.2rem 4rem; }
 
 /* Cards */
 .cards { --gap:1.4rem; display:grid; grid-template-columns:repeat(auto-fill,minmax(250px,1fr)); gap:var(--gap); margin-top:1.75rem; }
-.card { position:relative; background:linear-gradient(145deg,#fffbe9 60%,#ffe5ec 100%); border:1.5px solid #ffb7c5; padding:1rem 1rem 1.15rem; border-radius:var(--radius); overflow:hidden; display:flex; flex-direction:column; gap:.75rem; box-shadow:0 2px 12px #ffb7c533; }
+.card { position:relative; background:linear-gradient(145deg, rgba(255, 251, 233, 0.62) 60%, rgba(255, 229, 236, 0.62) 100%); -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px); border:1.5px solid #ffb7c5; padding:1rem 1rem 1.15rem; border-radius:var(--radius); overflow:hidden; display:flex; flex-direction:column; gap:.75rem; box-shadow:0 2px 12px #ffb7c533; }
 .card::before { content:""; position:absolute; inset:0; background:radial-gradient(circle at 20% 15%,rgba(255,183,197,0.25),transparent 70%); opacity:0; transition:.5s opacity; }
 .card:hover::before { opacity:1; }
 .card h3 { font-size:1.05rem; margin:0; }
@@ -168,7 +173,7 @@ main { max-width:1100px; margin:0 auto; padding:2.5rem 1.2rem 4rem; }
     column-count: 1;
   }
 }
-.about__section { background:#ffe5ec; border:1.5px solid #ffb7c5; padding:1.25rem 1.35rem 1.5rem; border-radius:var(--radius); color:#7c4a2d; }
+.about__section { background:rgba(255, 229, 236, 0.62); -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px); border:1.5px solid #ffb7c5; padding:1.25rem 1.35rem 1.5rem; border-radius:var(--radius); color:#7c4a2d; }
 .about__section h2 { margin-top:0; font-size:1.15rem; }
 
 /* Timeline */
@@ -183,10 +188,10 @@ main { max-width:1100px; margin:0 auto; padding:2.5rem 1.2rem 4rem; }
 
 /* Skill groups */
 .skill-groups { display:grid; gap:1.1rem; }
-.skill-group { background:#fffbe9; border:1.5px solid #b6e2a1; padding:1rem; border-radius:12px; }
+.skill-group { background:rgba(255, 251, 233, 0.62); -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px); border:1.5px solid #b6e2a1; padding:1rem; border-radius:12px; }
 .skill-group h3 { margin:0 0 .6rem; font-size:0.95rem; color:#7c4a2d; }
 .skill-subgroups { display:grid; gap:1rem; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); }
-.skill-subgroup { background:linear-gradient(145deg,#e6f9e0 60%,#ffe5ec 100%); border:1px solid #b6e2a1; padding:.9rem 1rem; border-radius:12px; }
+.skill-subgroup { background:linear-gradient(145deg, rgba(230, 249, 224, 0.62) 60%, rgba(255, 229, 236, 0.62) 100%); -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px); border:1px solid #b6e2a1; padding:.9rem 1rem; border-radius:12px; }
 .skill-subgroup h4 { margin:0 0 .55rem; font-size:.88rem; color:#7c4a2d; letter-spacing:.2px; }
 .skill-subgroup .skill-list { gap:.4rem; }
 .skill-subgroup .skill-list li { font-size:.68rem; padding:.45rem .6rem; border-radius:9px; }

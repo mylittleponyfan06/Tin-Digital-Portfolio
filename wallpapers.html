@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wallpapers | Tristin</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <style>
+    main { max-width: 1200px; }
+    .wall-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; }
+    .wall-card { background: rgba(255,251,233,0.82); backdrop-filter: blur(6px); border:1px solid #ffb7c5; border-radius: 14px; padding: .85rem; display:flex; flex-direction:column; gap:.6rem; }
+    .wall-card img { width: 100%; height: auto; border-radius: 10px; box-shadow: 0 2px 12px #0002; }
+    .wall-card .meta { display:flex; justify-content:space-between; align-items:center; }
+    .wall-card .meta span { color:#7c4a2d; font-weight:600; font-size:.9rem; }
+    .wall-card .actions { display:flex; gap:.5rem; }
+    .wall-card .actions a { padding:.45rem .8rem; border-radius:999px; border:1px solid #ffb7c5; color:#e75480; text-decoration:none; font-weight:600; background:#ffe5ec; }
+    .wall-card .actions a:hover { filter:brightness(1.05); }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav" aria-label="Main navigation">
+      <a class="logo" href="index.html">Tristin <span>(˵˃ ᴜ ˂˵)</span></a>
+      <button id="navToggle" class="nav__toggle" aria-expanded="false" aria-controls="navMenu">☰</button>
+      <ul id="navMenu" class="nav__menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="art-projects.html">Projects</a></li>
+        <li><a href="code-projects.html">Hobbies</a></li>
+        <li><a href="about.html">About me!</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main class="page">
+    <h1 class="page-title">Wallpapers</h1>
+    <p class="page-intro">Here are the background illustrations used across the site, made by me! Click to view full-size or to download.</p>
+    <div class="wall-grid">
+      <article class="wall-card">
+        <a href="assets/images/portfoliowallpaper.jpg" target="_blank" rel="noopener">
+          <img src="assets/images/portfoliowallpaper.jpg" alt="Portfolio wallpaper" />
+        </a>
+        <div class="meta">
+          <span>Homepage wallpaper</span>
+          <div class="actions">
+            <a href="assets/images/portfoliowallpaper.jpg" download>Download</a>
+            <a href="assets/images/portfoliowallpaper.jpg" target="_blank" rel="noopener">Open</a>
+          </div>
+        </div>
+      </article>
+      <article class="wall-card">
+        <a href="assets/images/projectpage.jpg" target="_blank" rel="noopener">
+          <img src="assets/images/projectpage.jpg" alt="Projects page wallpaper" />
+        </a>
+        <div class="meta">
+          <span>Projects wallpaper</span>
+          <div class="actions">
+            <a href="assets/images/projectpage.jpg" download>Download</a>
+            <a href="assets/images/projectpage.jpg" target="_blank" rel="noopener">Open</a>
+          </div>
+        </div>
+      </article>
+    </div>
+  </main>
+  <footer class="site-footer">
+    <section class="contact-footer">
+      <a class="btn primary" href="mailto:tristinsiM@gmail.com?subject=Portfolio%20Inquiry&body=Hi%20Tristin%2C%0D%0A%0D%0AMy%20name%20is%20...%0D%0AI%27d%20like%20to%20talk%20about%20...%0D%0A%0D%0AThanks!" aria-label="Email me">
+        <span>Email me</span>
+      </a>
+      <div class="social-links icon-row">
+        <a class="icon-link" href="https://github.com/mylittleponyfan06" target="_blank" rel="noopener" aria-label="GitHub profile">
+          <img src="assets/images/github-mark-white.png" alt="" aria-hidden="true" />
+          <span class="tooltip">GitHub</span>
+          <span class="sr-only">GitHub</span>
+        </a>
+        <a class="icon-link" href="https://www.linkedin.com/in/your-handle" target="_blank" rel="noopener" aria-label="LinkedIn profile">
+          <img src="assets/images/linkedin_logo.png" alt="" aria-hidden="true" />
+          <span class="tooltip">LinkedIn</span>
+          <span class="sr-only">LinkedIn</span>
+        </a>
+        <a class="icon-link" href="https://t.me/geeklord88" target="_blank" rel="noopener" aria-label="Message me on Telegram">
+          <img src="assets/images/tele_trans_white.webp" alt="" aria-hidden="true" />
+          <span class="tooltip">Telegram</span>
+          <span class="sr-only">Telegram</span>
+        </a>
+      </div>
+    </section>
+  </footer>
+</body>
+</html>

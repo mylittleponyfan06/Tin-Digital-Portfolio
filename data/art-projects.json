@@ -1,7 +1,7 @@
 [
   {
     "title": "Computer Performance Display",
-    "subtitle": "Rainmeter asset to display computer specs! <br> ",
+    "subtitle": "Rainmeter asset to display computer specs! <br> -========- <br> Utilises HWiNFO to read GPU + RAM usage and GPU Temp <br><br> Dynamic and interactive interface, Pochitchi's sprite changes depending on GPU temperature and if you click on him. (in-site demo simulation coming soon)",
     "tags": ["Coding"],
     "featured": true,
     "image": "assets/images/potchion.png", 
@@ -9,7 +9,7 @@
   },
   {
     "title": "Lynkistry",
-    "subtitle": "Full-stack web application in collaboration with Singapore Chinese Chamber of Commerce and Industry (SCCCI) member companies in the insurance and finance sector.",
+    "subtitle": "Full-stack web application in collaboration with Singapore Chinese Chamber of Commerce and Industry (SCCCI) member companies in the insurance and finance sector. <br> -========- <br>Github page currently privated!",
     "tags": ["FSDP", "Coding", "GenAI", "CloudTiDB", "AWS", "GitHub"],
     "featured": true,
     "image": "assets/images/Lynkistrylogo.png",
