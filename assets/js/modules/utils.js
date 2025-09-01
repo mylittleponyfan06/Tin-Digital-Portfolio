@@ -48,13 +48,12 @@ export function initFilters(allTags, projects, container) {
   if (!wrap) return;
 
   const isArt = container.id.includes('art');
-  // For code projects, only show 'Performance', 'CCA', and a 'Search' button
   let shownTags;
   if (isArt) {
     const allowedArtTabs = ["Guitar", "Coding", "Crochet"];
     shownTags = allowedArtTabs.filter(tag => allTags.includes(tag));
   } else {
-    shownTags = ["Performance", "CCA"];
+    shownTags = ["performances", "CCA"];
   }
 
   const makeBtn = (label) => {

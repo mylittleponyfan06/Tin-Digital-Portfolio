@@ -128,7 +128,7 @@ main { max-width:1100px; margin:0 auto; padding:2.5rem 1.2rem 4rem; }
   transform:translateY(-50%);
   width:24px;
   height:24px;
-  background:url('../images/cherry.svg') no-repeat center/contain;
+  background:url('../images/pudding.png') no-repeat center/contain;
 }
 .section-title.clover::before { background-image:url('../images/clover.svg'); }
 .page-intro { color:var(--text-dim); margin-top:0; }
