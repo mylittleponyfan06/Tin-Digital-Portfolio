@@ -95,6 +95,34 @@ body.has-illustration.art-bg {
     background-attachment: fixed; /* subtle parallax on desktop */
   }
 }
+
+/* iOS/iPadOS Safari has issues with background-attachment: fixed. Disable it there. */
+@supports (-webkit-touch-callout: none) {
+  body.has-illustration { background-attachment: scroll; }
+}
+
+/* Preserve wallpaper aspect ratio on tall/narrow viewports (e.g., iPad portrait) */
+@media (max-aspect-ratio: 3/4) {
+  body.has-illustration {
+    background-size: contain;   /* no cropping; may letterbox */
+    background-color: var(--bg); /* fill any side gaps softly */
+    background-position: top center;
+  }
+}
+
+/* Also prefer contain on tablets (incl. iPad Pro) in landscape to avoid aggressive cropping */
+@media (max-width: 1366px) and (orientation: landscape) {
+  body.has-illustration {
+    background-attachment: scroll; /* avoid iPad repaint glitches */
+    background-size: contain;
+    background-position: center center;
+    background-color: var(--bg);
+  }
+}
+
+/* Optional per-page controls */
+body.has-illustration.bg-contain { background-size: contain !important; background-position: center center !important; background-attachment: scroll !important; }
+body.has-illustration.bg-cover { background-size: cover !important; }
 img { max-width:100%; display:block; }
 a { color: var(--accent); text-decoration:none; }
 a:hover { text-decoration:underline; color:#e75480; }
