@@ -5,7 +5,7 @@
     "tags": ["Coding"],
     "featured": true,
     "image": "assets/images/potchion.png", 
-    "links": { "Rainmeter": "https://github.com/mylittleponyfan06/pochitchi-rainmeter" }
+    "links": { "Rainmeter": "https://github.com/mylittleponyfan06/pochitchi-rainmeter.git" }
   },
   {
     "title": "Lynkistry",
@@ -56,6 +56,6 @@
     "tags": ["gig", "live", "Guitar"],
     "featured": true,
     "image": "assets/images/keith_cover.jpg",
-    "links": { "BMOS": "https://youtube.com" }
+    "links": { "BMOS": "https://youtu.be/cYLIr5dLnrY" }
   }
 ]
