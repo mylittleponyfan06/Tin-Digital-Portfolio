@@ -9,12 +9,20 @@
     main { max-width: 1200px; }
     .wall-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; }
     .wall-card { background: rgba(255,251,233,0.82); backdrop-filter: blur(6px); border:1px solid #ffb7c5; border-radius: 14px; padding: .85rem; display:flex; flex-direction:column; gap:.6rem; }
-    .wall-card img { width: 100%; height: auto; border-radius: 10px; box-shadow: 0 2px 12px #0002; }
+  .wall-card img { width: 100%; height: auto; border-radius: 10px; box-shadow: 0 2px 12px #0002; cursor: zoom-in; }
     .wall-card .meta { display:flex; justify-content:space-between; align-items:center; }
     .wall-card .meta span { color:#7c4a2d; font-weight:600; font-size:.9rem; }
     .wall-card .actions { display:flex; gap:.5rem; }
     .wall-card .actions a { padding:.45rem .8rem; border-radius:999px; border:1px solid #ffb7c5; color:#e75480; text-decoration:none; font-weight:600; background:#ffe5ec; }
     .wall-card .actions a:hover { filter:brightness(1.05); }
+  .usage-note { font-size:.72rem; color:#b07d6b; margin-top:.35rem; display:block; }
+    /* Lightbox */
+    .lightbox { position: fixed; inset: 0; background: rgba(0,0,0,0.5); backdrop-filter: blur(2px); display: none; align-items: center; justify-content: center; z-index: 10000; }
+    .lightbox.show { display: flex; }
+    .lightbox__content { position: relative; max-width: 94vw; max-height: 94vh; }
+    .lightbox__img { max-width: 100%; max-height: 100%; border-radius: 14px; box-shadow: 0 12px 36px rgba(0,0,0,0.35); }
+    .lightbox__close { position: absolute; top: -12px; right: -12px; width: 40px; height: 40px; border-radius: 50%; display:grid; place-items:center; border: 1px solid #ffb7c5; background:#ffe5ec; color:#e75480; font-weight:700; cursor:pointer; box-shadow: 0 8px 18px rgba(0,0,0,0.2); }
+    .lightbox__close:hover { filter: brightness(1.05); }
   </style>
 </head>
 <body>
@@ -35,27 +43,25 @@
     <p class="page-intro">Here are the background illustrations used across the site, made by me! Click to view full-size or to download.</p>
     <div class="wall-grid">
       <article class="wall-card">
-        <a href="assets/images/portfoliowallpaper.jpg" target="_blank" rel="noopener">
-          <img src="assets/images/portfoliowallpaper.jpg" alt="Portfolio wallpaper" />
-        </a>
+        <img src="assets/images/portfoliowallpaper.jpg" alt="Portfolio wallpaper" data-full="assets/images/portfoliowallpaper.jpg" />
         <div class="meta">
           <span>Homepage wallpaper</span>
           <div class="actions">
-            <a href="assets/images/portfoliowallpaper.jpg" download>Download</a>
+            <a href="assets/images/portfoliowallpaper.jpg" download title="Personal use only. Please don't redistribute.">Download</a>
             <a href="assets/images/portfoliowallpaper.jpg" target="_blank" rel="noopener">Open</a>
           </div>
+          <small class="usage-note">For personal use only. Please don’t redistribute or sell. Credit appreciated if you share a screenshot.</small>
         </div>
       </article>
       <article class="wall-card">
-        <a href="assets/images/projectpage.jpg" target="_blank" rel="noopener">
-          <img src="assets/images/projectpage.jpg" alt="Projects page wallpaper" />
-        </a>
+        <img src="assets/images/projectpage.jpg" alt="Projects page wallpaper" data-full="assets/images/projectpage.jpg" />
         <div class="meta">
           <span>Projects wallpaper</span>
           <div class="actions">
-            <a href="assets/images/projectpage.jpg" download>Download</a>
+            <a href="assets/images/projectpage.jpg" download title="Personal use only. Please don't redistribute.">Download</a>
             <a href="assets/images/projectpage.jpg" target="_blank" rel="noopener">Open</a>
           </div>
+          <small class="usage-note">For personal use only. Please don’t redistribute or sell. Credit appreciated if you share a screenshot.</small>
         </div>
       </article>
     </div>
@@ -84,5 +90,43 @@
       </div>
     </section>
   </footer>
+  <!-- Lightbox Modal -->
+  <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="View image">
+    <div class="lightbox__content">
+      <button id="lightboxClose" class="lightbox__close" aria-label="Close">×</button>
+      <img id="lightboxImage" class="lightbox__img" src="" alt="Full-size wallpaper" />
+    </div>
+  </div>
+  <script>
+    (function(){
+      const lightbox = document.getElementById('lightbox');
+      const lightboxImg = document.getElementById('lightboxImage');
+      const closeBtn = document.getElementById('lightboxClose');
+      function openLightbox(src){
+        lightboxImg.src = src;
+        lightbox.classList.add('show');
+        document.body.style.overflow = 'hidden';
+      }
+      function closeLightbox(){
+        lightbox.classList.remove('show');
+        lightboxImg.src = '';
+        document.body.style.overflow = '';
+      }
+      document.querySelectorAll('.wall-card img').forEach(img => {
+        img.addEventListener('click', (e) => {
+          const full = img.getAttribute('data-full') || img.src;
+          openLightbox(full);
+        });
+      });
+      // Click outside content closes
+      lightbox.addEventListener('click', closeLightbox);
+      // Prevent click inside content from closing
+      document.querySelector('.lightbox__content').addEventListener('click', (e)=>{ e.stopPropagation(); });
+      // Close button
+      closeBtn.addEventListener('click', closeLightbox);
+      // Escape key
+      window.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeLightbox(); });
+    })();
+  </script>
 </body>
 </html>

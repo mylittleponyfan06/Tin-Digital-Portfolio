@@ -3,19 +3,25 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tristin Sim!!</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <title>Not Found · Tristin</title>
   <link rel="stylesheet" href="assets/css/style.css" />
+  <style>
+    body { display:flex; min-height:100vh; flex-direction:column; }
+    main { flex:1; display:grid; place-items:center; text-align:center; padding:2rem 1rem; }
+    .wrap { max-width: 900px; background: rgba(255,251,233,.72); backdrop-filter: blur(6px); border:1px solid #ffb7c5; border-radius:18px; padding: 1.25rem; }
+    .oops { font-size: clamp(2rem, 5vw, 3rem); margin-bottom: .5rem; }
+    .msg { color: #b07d6b; margin-bottom: 1rem; }
+    .actions { margin-top: 1.25rem; display:flex; gap:.75rem; justify-content:center; flex-wrap:wrap; }
+    .tip { font-size:.8rem; color:#b07d6b; margin-top:.5rem; }
+  </style>
 </head>
-<body class="has-illustration">
+<body class="has-illustration notfound-bg bg-contain">
   <header class="site-header">
     <nav class="nav" aria-label="Main navigation">
-      <a class="logo" href="index.html">Tristin <span>ꉂ(˵˃ ᗜ ˂˵)</span></a>
+      <a class="logo" href="index.html">Tristin <span>ꠂ(˵˃ ᴜ ˂˵)</span></a>
       <button id="navToggle" class="nav__toggle" aria-expanded="false" aria-controls="navMenu">☰</button>
       <ul id="navMenu" class="nav__menu">
-        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="index.html">Home</a></li>
         <li><a href="art-projects.html">Projects</a></li>
         <li><a href="code-projects.html">Hobbies</a></li>
         <li><a href="about.html">About me!</a></li>
@@ -23,24 +29,19 @@
     </nav>
   </header>
   <main>
-    <section class="hero">
-      <div class="hero__content">
-        <h1>Hello!! I'm <span class="accent" id="yourName">Tristin</span></h1>
-        <p class="lead">₊✧˚﹕︶︶︶﹕૮₍ ⸝⸝´ ꒳ `⸝⸝ ₎ა﹕︶︶︶﹕ ˚✧₊<br>This website is still a work in progres as im currently moving house right now! <br> A showcase of the things I build, play, and learn. <br> ꒰꒰・┄┄┄┄・♡・┄┄┄┄・꒱꒱ <br>All wallpapers are put together and drawn by me!</p>
-        <div class="hero__actions">
-          <a href="art-projects.html" class="btn primary">Explore my Projects</a>
-          <a href="wallpapers.html" class="btn outline">View wallpapers</a>
-        </div>
+    <div class="wrap">
+      <h1 class="oops">404 — Page not found</h1>
+      <p class="msg">The page you’re looking for doesn’t exist or was moved.</p>
+      <div class="actions">
+        <a class="btn primary" href="index.html">Go Home</a>
+        <a class="btn outline" href="wallpapers.html">See Wallpapers</a>
       </div>
-    </section>
-    <section class="featured" id="featuredProjects">
-      <h2 class="section-title">Featured Items</h2>
-      <div class="cards" id="featuredCards" aria-live="polite"></div>
-    </section>
+      <p class="tip">Tip: Make sure the link is correct, or head back to the homepage.</p>
+    </div>
   </main>
   <footer class="site-footer">
     <section class="contact-footer">
-  <a class="btn primary" href="mailto:tristinsiM@gmail.com?subject=Portfolio%20Inquiry&body=Hi%20Tristin%2C%0D%0A%0D%0AMy%20name%20is%20...%0D%0AI%27d%20like%20to%20talk%20about%20...%0D%0A%0D%0AThanks!" aria-label="Email me">
+      <a class="btn primary" href="mailto:tristinsiM@gmail.com?subject=Portfolio%20Inquiry&body=Hi%20Tristin%2C%0D%0A%0D%0AMy%20name%20is%20...%0D%0AI%27d%20like%20to%20talk%20about%20...%0D%0A%0D%0AThanks!" aria-label="Email me">
         <span>Email me</span>
       </a>
       <div class="social-links icon-row">
@@ -62,6 +63,5 @@
       </div>
     </section>
   </footer>
-  <script src="assets/js/main.js" type="module"></script>
 </body>
 </html>

@@ -4,7 +4,7 @@
   "Backend Development": ["Node.js", "Python", "Flask", "C#"],
   "Database Management": ["MySQL", "CloudTiDB"],
   "Tools & Version Control": ["GitHub"],
-  "Cloud & AI": ["Amazon Web Service (AWS)", "GenAI"]
+  "Cloud & AI": ["Amazon Web Service (AWS)"]
   },
   "soft": [
     "Communication skills",
@@ -24,6 +24,6 @@
     "Baking",
     "Barista",
     "Gig Performance",
-    "Guitar pedal Software modding"
+    "PC building"
   ]
 }

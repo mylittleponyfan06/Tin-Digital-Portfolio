@@ -4,7 +4,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: #fffbe9;
+  background: #f3eed8;
   border-radius: 18px;
   box-shadow: 0 8px 32px #ffb7c533;
   padding: 2.2rem 2.2rem 1.7rem;
@@ -54,7 +54,7 @@
 @keyframes modalIn { from { opacity:0; transform:translateY(-30%) scale(.95);} to { opacity:1; transform:translateY(-50%) scale(1);} }
 /* Base Styles */
 :root {
-  --bg: #fffbe9; /* pudding cream */
+  --bg: #fffae2; /* pudding cream */
   --bg-alt: hsl(106, 23%, 71%); /* pastel apple green */
   --text: #ad7554; /* soft caramel brown */
   --text-dim: #b07d6b; /* lighter brown */
@@ -76,16 +76,28 @@ body {
 }
 
 /* Non-repeating, full-viewport illustration background */
+/* Use a CSS variable so pages can override the image (and provide a tablet-specific alternative). */
 body.has-illustration {
-  background-image: url('../images/portfoliowallpaper.jpg');
+  /* Default wallpaper (can be overridden per page with --wallpaper-url) */
+  background-image: var(--wallpaper-url, url('../images/portfoliowallpaper.jpg'));
   background-repeat: no-repeat;
   background-size: cover;      /* stretches to bottom of the screen */
   background-position: top center;
+  /* When the image doesn't fill (e.g., contain on tablet), show the site background color */
+  background-color: var(--bg);
 }
 
-/* Art page wants the JPG version specifically */
+/* Art page wallpaper */
 body.has-illustration.art-bg {
-  background-image: url('../images/projectpage.jpg');
+  /* Provide the per-page image via variable */
+  --wallpaper-url: url('../images/projectpage.jpg');
+  /* Optional: if you have a PNG you prefer on tablet sizes, set this variable in CSS or inline on body
+     e.g. --wallpaper-url-tablet: url('../images/projectpage.png'); */
+}
+
+/* 404 page wallpaper */
+body.has-illustration.notfound-bg {
+  --wallpaper-url: url('../images/404.jpg');
 }
 
 /* Optional: provide a mobile-specific image later if needed */
@@ -104,18 +116,24 @@ body.has-illustration.art-bg {
 /* Preserve wallpaper aspect ratio on tall/narrow viewports (e.g., iPad portrait) */
 @media (max-aspect-ratio: 3/4) {
   body.has-illustration {
+    /* Prefer full image visibility on tall/narrow screens */
+    background-image: var(--wallpaper-url-tablet, var(--wallpaper-url, url('../images/portfoliowallpaper.jpg')));
     background-size: contain;   /* no cropping; may letterbox */
     background-color: var(--bg); /* fill any side gaps softly */
     background-position: top center;
+    background-repeat: no-repeat;
+    background-attachment: scroll; /* avoid iOS/Safari glitches */
   }
 }
 
 /* Also prefer contain on tablets (incl. iPad Pro) in landscape to avoid aggressive cropping */
 @media (max-width: 1366px) and (orientation: landscape) {
   body.has-illustration {
+    background-image: var(--wallpaper-url-tablet, var(--wallpaper-url, url('../images/portfoliowallpaper.jpg')));
     background-attachment: scroll; /* avoid iPad repaint glitches */
     background-size: contain;
-    background-position: center center;
+    background-position: top center;
+    background-repeat: no-repeat;
     background-color: var(--bg);
   }
 }
@@ -212,7 +230,9 @@ main { max-width:1100px; margin:0 auto; padding:2.5rem 1.2rem 4rem; }
 
 /* Skills */
 .skill-list { list-style:none; margin:0; padding:0; display:flex; flex-wrap:wrap; gap:.5rem; }
-.skill-list li { background:#e6f9e0; border:1px solid #b6e2a1; color:#7c4a2d; padding:.5rem .7rem; border-radius:10px; font-size:.7rem; font-weight:600; letter-spacing:.5px; }
+.skill-list li { display:inline-flex; align-items:center; gap:.45rem; background:#e6f9e0; border:1px solid #b6e2a1; color:#7c4a2d; padding:.45rem .6rem; border-radius:10px; font-size:.7rem; font-weight:600; letter-spacing:.5px; line-height:1; }
+/* Consistent icon sizing for svg/png/webp in skill pills */
+.skill-icon { width:22px; height:22px; object-fit:contain; display:inline-block; border-radius:3px; background:transparent; padding:0; box-shadow:none; }
 
 /* Skill groups */
 .skill-groups { display:grid; gap:1.1rem; }
