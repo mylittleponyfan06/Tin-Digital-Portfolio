@@ -183,6 +183,10 @@ main { max-width:1100px; margin:0 auto; padding:2.5rem 1.2rem 4rem; }
 }
 .section-title.clover::before { background-image:url('../images/clover.svg'); }
 .page-intro { color:var(--text-dim); margin-top:0; }
+/* Icon that sits inline at the end of a title */
+.page-title .title-icon, .section-title .title-icon, .hero h1 .title-icon {
+  height: 1.5em; width: auto; object-fit: contain; vertical-align: -0.2em; margin-left: .1em; display: inline-block;
+}
 
 /* Readability helpers: improve contrast over busy wallpapers without dimming bg */
 /* Utility you can add to any element: class="readsafe" or "readsafe-strong" */

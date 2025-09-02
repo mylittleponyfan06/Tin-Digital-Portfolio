@@ -3,7 +3,7 @@
     "title": "Student Life Carnival Event 2025",
     "subtitle": " Nanyang Polytechnic - <b>Crew Studio CCA</b> <br><br> carnival event to showcase CCA group.",
     "tags": ["NYP", "performances", "Crew Studio", "Guitar", "CCA"],
-    "featured": true,
+    "featured": false,
     "image": "assets/images/SLC.JPG"
   },
   {
@@ -17,14 +17,14 @@
     "title": "Stupid Cupid",
     "subtitle": "ForeverMore Productions - <b>Simone Bianca and friends</b> <br><br> Valentines day gig",
     "tags": ["Gig", "performances", "guitar", "Saylah Studios"],
-    "featured": true,
+    "featured": false,
     "image": "assets/images/stupidcupid.jpg"
   },
     {
     "title": "Private Event",
-    "subtitle": "Blow Me on Sunday - <b>Keith</b>",
+    "subtitle": "Up up and away - <b>Keith</b>",
     "tags": ["Gig","performances", "guitar", "Saylah Studios"],
-    "featured": true,
+    "featured": false,
     "image": "assets/images/bmos.jpg"
   }
 ]
