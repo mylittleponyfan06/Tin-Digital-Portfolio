@@ -5,6 +5,7 @@ function qsa(sel, root=document) { return Array.from(root.querySelectorAll(sel))
 
 let currentIdx = 0;
 let slides = [];
+let positionArrowsCleanup = null;
 
 // Map slide index to official product URLs
 const productLinks = [
@@ -24,10 +25,10 @@ function showSlide(idx) {
   let btn = '';
   const link = productLinks[currentIdx];
   if (link) {
-    btn = `<a href="${link}" target="_blank" rel="noopener" class="btn outline" style="margin-top:1rem;">Official Product Site</a>`;
+  btn = `<a href="${link}" target="_blank" rel="noopener" class="btn outline" style="margin-top:1rem;">Official Product Site</a>`;
   }
   slideWrap.innerHTML = `
-    <img src="${slide.img}" alt="${slide.title}" style="max-width:220px; max-height:180px; border-radius:10px; box-shadow:0 2px 12px #0002; margin-bottom:1rem;">
+  <img class="equipment-img" src="${slide.img}" alt="${slide.title}">
     <h4 style="margin:0 0 .5rem;">${slide.title}</h4>
     <p style="font-size:.92rem; color:#b2b9cc; margin:0;">${slide.desc}</p>
     ${btn}
@@ -35,21 +36,32 @@ function showSlide(idx) {
   // Indicators
   const ind = qs('.carousel-indicators', qs('#equipmentModal'));
   ind.innerHTML = slides.map((_,i) => `<span class="carousel-dot${i===currentIdx?' active':''}" data-idx="${i}"></span>`).join('');
+
+  // Reposition arrows after DOM updates
+  requestAnimationFrame(positionArrows);
 }
 
 function openEquipmentModal(equipment) {
   slides = equipment;
   currentIdx = 0;
   const modal = qs('#equipmentModal');
+  const content = qs('.equipment-modal__content', modal);
   modal.style.display = 'block';
+  // reset zoom
+  content.style.setProperty('--zoom', '1');
+  const range = qs('.zoom-range', modal);
+  if (range) range.value = '1';
   showSlide(0);
   setTimeout(()=>modal.classList.add('show'), 10);
+  // Init arrow positioning listeners
+  setupArrowPositioning();
 }
 
 function closeEquipmentModal() {
   const modal = qs('#equipmentModal');
   modal.classList.remove('show');
   setTimeout(()=>{ modal.style.display = 'none'; }, 180);
+  if (positionArrowsCleanup) { positionArrowsCleanup(); positionArrowsCleanup = null; }
 }
 
 export function initEquipmentModal() {
@@ -65,8 +77,11 @@ export function initEquipmentModal() {
   qs('#equipmentModal .equipment-modal__close').onclick = closeEquipmentModal;
   qs('#equipmentModal .equipment-modal__overlay').onclick = closeEquipmentModal;
   // Carousel prev/next
-  qs('#equipmentModal .carousel-prev').onclick = () => showSlide(currentIdx-1);
-  qs('#equipmentModal .carousel-next').onclick = () => showSlide(currentIdx+1);
+  // support both positions (outside sibling + legacy inside)
+  const prevBtn = qs('#equipmentModal > .carousel-prev') || qs('#equipmentModal .carousel-prev');
+  const nextBtn = qs('#equipmentModal > .carousel-next') || qs('#equipmentModal .carousel-next');
+  if (prevBtn) prevBtn.onclick = () => showSlide(currentIdx-1);
+  if (nextBtn) nextBtn.onclick = () => showSlide(currentIdx+1);
   // Dots
   qs('#equipmentModal .carousel-indicators').onclick = e => {
     const dot = e.target.closest('.carousel-dot');
@@ -80,4 +95,60 @@ export function initEquipmentModal() {
     if (e.key === 'ArrowLeft') showSlide(currentIdx-1);
     if (e.key === 'ArrowRight') showSlide(currentIdx+1);
   });
+
+  // Zoom wiring
+  const modal = qs('#equipmentModal');
+  const content = qs('.equipment-modal__content', modal);
+  const range = qs('.zoom-range', modal);
+  const zoomIn = qs('.zoom-in', modal);
+  const zoomOut = qs('.zoom-out', modal);
+  const setZoom = (z) => {
+    const clamped = Math.max(0.8, Math.min(1.8, z));
+    content.style.setProperty('--zoom', String(clamped));
+    if (range) range.value = String(clamped);
+  };
+  if (range) range.addEventListener('input', () => setZoom(parseFloat(range.value)));
+  if (zoomIn) zoomIn.addEventListener('click', () => setZoom((parseFloat(range.value)||1)+0.1));
+  if (zoomOut) zoomOut.addEventListener('click', () => setZoom((parseFloat(range.value)||1)-0.1));
+
+  // Also reposition arrows on zoom changes
+  const observer = new MutationObserver(() => positionArrows());
+  if (content) observer.observe(content, { attributes:true, attributeFilter:['style']});
+}
+
+function getContentRect() {
+  const modal = qs('#equipmentModal');
+  const content = qs('.equipment-modal__content', modal);
+  if (!content) return null;
+  return content.getBoundingClientRect();
+}
+
+function positionArrows() {
+  const modal = qs('#equipmentModal');
+  const contentRect = getContentRect();
+  if (!modal || !contentRect) return;
+  const prevBtn = qs('#equipmentModal > .carousel-prev');
+  const nextBtn = qs('#equipmentModal > .carousel-next');
+  if (!prevBtn || !nextBtn) return;
+  const btnOffset = 12; // px away from the content box
+  const midY = contentRect.top + contentRect.height / 2;
+  const prevX = contentRect.left - btnOffset - prevBtn.offsetWidth;
+  const nextX = contentRect.right + btnOffset;
+  Object.assign(prevBtn.style, { top: `${midY}px`, left: `${prevX}px`, transform: 'translateY(-50%)' });
+  Object.assign(nextBtn.style, { top: `${midY}px`, left: `${nextX}px`, transform: 'translateY(-50%)' });
+}
+
+function setupArrowPositioning() {
+  const onResize = () => positionArrows();
+  window.addEventListener('resize', onResize);
+  // Reposition after zoom slider input as well
+  const modal = qs('#equipmentModal');
+  const range = qs('.zoom-range', modal);
+  const onInput = () => positionArrows();
+  if (range) range.addEventListener('input', onInput);
+  positionArrows();
+  positionArrowsCleanup = () => {
+    window.removeEventListener('resize', onResize);
+    if (range) range.removeEventListener('input', onInput);
+  };
 }

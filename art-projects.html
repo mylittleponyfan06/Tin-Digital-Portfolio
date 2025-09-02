@@ -27,15 +27,21 @@
   </main>
   <!-- Equipment Specs Modal -->
   <div id="equipmentModal" class="equipment-modal" style="display:none;">
-    <div class="equipment-modal__overlay"></div>
-    <div class="equipment-modal__content">
+  <div class="equipment-modal__overlay"></div>
+  <!-- Static arrows outside scaled content -->
+  <button class="carousel-prev" aria-label="Previous">&#8592;</button>
+  <button class="carousel-next" aria-label="Next">&#8594;</button>
+  <div class="equipment-modal__content">
       <button class="equipment-modal__close" aria-label="Close">&times;</button>
       <div class="equipment-carousel">
-        <button class="carousel-prev" aria-label="Previous">&#8592;</button>
         <div class="carousel-slide">
           <!-- Image and text will be injected here -->
         </div>
-        <button class="carousel-next" aria-label="Next">&#8594;</button>
+      </div>
+      <div class="equipment-zoom" aria-label="Zoom controls">
+        <button type="button" class="zoom-out" title="Zoom out" aria-label="Zoom out">−</button>
+        <input type="range" class="zoom-range" min="0.8" max="1.8" step="0.05" value="1" aria-label="Zoom level" />
+        <button type="button" class="zoom-in" title="Zoom in" aria-label="Zoom in">+</button>
       </div>
       <div class="carousel-indicators"></div>
     </div>

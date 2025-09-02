@@ -15,11 +15,19 @@
     "image": "assets/images/Lynkistrylogo.png",
     "links": { "github": "https://github.com/RKaiWut/Lynkistry" }
   },
+    {
+    "title": "Indie band: Keith",
+    "subtitle": "Live gig performances with my band <b>\"Keith\"</b>! <br> Comprising of Nanyang Poly students from the schools: Information Technology, Engingeering, and Nursing.",
+    "tags": ["gig", "live", "Guitar"],
+    "featured": true,
+    "image": "assets/images/Keith_cover.jpg",
+    "links": { "BMOS": "https://youtu.be/cYLIr5dLnrY" }
+  },
   {
     "title": "Pedalboard Layout",
     "subtitle": "<b>Signal chain for live set</b> <br><br> <b>Case:</b> Stagg Pedalboard <br> <b>Power supply:</b> Mosky<br> <b>Fuzz:</b> Pop pedal Fuzz <br> <b>Compressor:</b> Effects Bakery Plain Bread Compressor  <br> <b>Multi-effects:</b> Zoom MS-50g",
     "tags": ["Guitar", "equipment", "collection"],
-    "featured": false,
+    "featured": true,
     "image": "assets/images/pedalboard.jpg",
     "equipment": [
       {
@@ -49,13 +57,5 @@
       }
     ],
     "links": { "pedal": "https://github.com/RKaiWut/Lynkistry" }
-  },
-  {
-    "title": "Indie band: Keith",
-    "subtitle": "Live gig performances with my band <b>\"Keith\"</b>! <br> Comprising of Nanyang Poly students from the schools: Information Technology, Engingeering, and Nursing.",
-    "tags": ["gig", "live", "Guitar"],
-    "featured": true,
-    "image": "assets/images/Keith_cover.jpg",
-    "links": { "BMOS": "https://youtu.be/cYLIr5dLnrY" }
   }
 ]

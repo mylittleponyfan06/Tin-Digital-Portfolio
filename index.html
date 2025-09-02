@@ -38,6 +38,27 @@
       <div class="cards" id="featuredCards" aria-live="polite"></div>
     </section>
   </main>
+  <!-- Equipment Specs Modal for Home Page -->
+  <div id="equipmentModal" class="equipment-modal" style="display:none;">
+    <div class="equipment-modal__overlay"></div>
+    <!-- Static arrows outside scaled content -->
+    <button class="carousel-prev" aria-label="Previous">&#8592;</button>
+    <button class="carousel-next" aria-label="Next">&#8594;</button>
+    <div class="equipment-modal__content">
+      <button class="equipment-modal__close" aria-label="Close">&times;</button>
+      <div class="equipment-carousel">
+        <div class="carousel-slide">
+          <!-- Image and text will be injected here -->
+        </div>
+      </div>
+      <div class="equipment-zoom" aria-label="Zoom controls">
+        <button type="button" class="zoom-out" title="Zoom out" aria-label="Zoom out">−</button>
+        <input type="range" class="zoom-range" min="0.8" max="1.8" step="0.05" value="1" aria-label="Zoom level" />
+        <button type="button" class="zoom-in" title="Zoom in" aria-label="Zoom in">+</button>
+      </div>
+      <div class="carousel-indicators"></div>
+    </div>
+  </div>
   <footer class="site-footer">
     <section class="contact-footer">
   <a class="btn primary" href="mailto:tristinsiM@gmail.com?subject=Portfolio%20Inquiry&body=Hi%20Tristin%2C%0D%0A%0D%0AMy%20name%20is%20...%0D%0AI%27d%20like%20to%20talk%20about%20...%0D%0A%0D%0AThanks!" aria-label="Email me">
@@ -63,5 +84,9 @@
     </section>
   </footer>
   <script src="assets/js/main.js" type="module"></script>
+  <script type="module">
+    import { initEquipmentModal } from './assets/js/equipment-modal.js';
+    initEquipmentModal();
+  </script>
 </body>
 </html>

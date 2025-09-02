@@ -1,57 +1,77 @@
-/* Equipment Modal Responsive Centering */
+/* Equipment Modal (centering + non-stretch images + zoom) */
 .equipment-modal__content {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
-  background: #f3eed8;
+  transform: translate(-50%, -50%) scale(var(--zoom, 1));
+  transform-origin: center;
+  background: rgba(255, 251, 233, 0.62);
+  -webkit-backdrop-filter: blur(9px);
+  backdrop-filter: blur(9px);
   border-radius: 18px;
   box-shadow: 0 8px 32px #ffb7c533;
-  padding: 2.2rem 2.2rem 1.7rem;
-  min-width: 0;
-  max-width: 95vw;
-  width: 100%;
+  padding: 2.2rem 2.2rem 1.2rem;
+  width: clamp(320px, 84vw, 700px);
+  max-width: 92vw;
   display: flex;
   flex-direction: column;
   align-items: center;
   animation: modalIn .18s cubic-bezier(.6,1.5,.5,1) both;
 }
-.carousel-slide img {
-  width: 100%;
+.carousel-slide { display:grid; place-items:center; text-align:center; }
+.carousel-slide img,
+.equipment-img {
+  width: auto;
   height: auto;
-  max-width: 220px;
-  max-height: 180px;
+  max-width: min(90%, 520px);
+  max-height: min(48vh, 360px);
+  object-fit: contain;
   border-radius: 10px;
   box-shadow: 0 2px 12px #0002;
   margin-bottom: 1rem;
 }
 @media (max-width: 600px) {
   .equipment-modal__content {
-    padding: 1.1rem 0.5rem 1.1rem;
+    padding: 1.1rem 0.7rem 0.9rem;
     max-width: 98vw;
     min-width: 0;
     border-radius: 12px;
   }
-  .carousel-slide img {
-    max-width: 90vw !important;
-    max-height: 38vw !important;
+  .carousel-slide img,
+  .equipment-img {
+    max-width: 96vw !important;
+    max-height: 40vh !important;
   }
 }
 /* Equipment Modal */
 .equipment-modal { position:fixed; inset:0; z-index:9999; display:none; }
 .equipment-modal.show { display:block; }
 .equipment-modal__overlay { position:absolute; inset:0; background:rgba(255, 183, 197, 0.3); -webkit-backdrop-filter:blur(3px); backdrop-filter:blur(3px); }
-.equipment-modal__content { position:absolute; top:50%; right:6vw; transform:translateY(-50%); background:rgba(255, 251, 233, 0.62); -webkit-backdrop-filter:blur(9px); backdrop-filter:blur(9px); border-radius:18px; box-shadow:0 8px 32px #ffb7c533; padding:2.2rem 2.2rem 1.7rem; min-width:320px; max-width:370px; width:100%; display:flex; flex-direction:column; align-items:center; animation:modalIn .18s cubic-bezier(.6,1.5,.5,1) both; }
+/* content centering defined above */
 .equipment-modal__close { position:absolute; top:1.1rem; right:1.2rem; background:none; border:none; color:#e75480; font-size:1.7rem; cursor:pointer; transition:.2s color; }
 .equipment-modal__close:hover { color:#ffb7c5; }
-.equipment-carousel { display:flex; align-items:center; gap:1.1rem; }
-.carousel-prev, .carousel-next { background:#ffb7c5; border:none; color:#e75480; font-size:1.5rem; border-radius:50%; width:36px; height:36px; display:grid; place-items:center; cursor:pointer; transition:.2s background,.2s color; }
+.equipment-carousel { display:flex; align-items:center; gap:0; position:relative; }
+/* Arrows as static siblings to content (not scaled) */
+.equipment-modal > .carousel-prev,
+.equipment-modal > .carousel-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10000;
+}
+.carousel-prev, .carousel-next { background:#ffb7c5; border:none; color:#e75480; font-size:1.5rem; border-radius:50%; width:36px; height:36px; display:grid; place-items:center; cursor:pointer; transition:.2s background,.2s color; box-shadow:0 2px 8px #0002; }
 .carousel-prev:hover, .carousel-next:hover { background:#ffe5ec; color:#e75480; }
-.carousel-slide { min-width:220px; text-align:center; }
+.carousel-slide { min-width:260px; }
 .carousel-indicators { display:flex; gap:.4rem; justify-content:center; margin-top:1.1rem; }
 .carousel-dot { width:10px; height:10px; border-radius:50%; background:#ffb7c5; border:1px solid #e75480; display:inline-block; cursor:pointer; transition:.18s background; }
 .carousel-dot.active { background:#e75480; border-color:transparent; }
-@keyframes modalIn { from { opacity:0; transform:translateY(-30%) scale(.95);} to { opacity:1; transform:translateY(-50%) scale(1);} }
+@keyframes modalIn { from { opacity:0; } to { opacity:1; } }
+
+/* Zoom controls */
+.equipment-zoom { display:flex; align-items:center; gap:.5rem; margin-top:.8rem; }
+.equipment-zoom button { background:#ffb7c5; border:1px solid #e75480; color:#7c4a2d; width:28px; height:28px; border-radius:999px; display:grid; place-items:center; cursor:pointer; }
+.equipment-zoom button:hover { background:#ffe5ec; }
+.equipment-zoom input[type="range"] { width: 170px; accent-color:#e75480; }
 /* Base Styles */
 :root {
   --bg: #fffae2; /* pudding cream */
@@ -79,7 +99,7 @@ body {
 /* Use a CSS variable so pages can override the image (and provide a tablet-specific alternative). */
 body.has-illustration {
   /* Default wallpaper (can be overridden per page with --wallpaper-url) */
-  background-image: var(--wallpaper-url, url('../images/portfoliowallpaper.jpg'));
+  background-image: var(--wallpaper-url, url('../images/portfoliowallpaper.png'));
   background-repeat: no-repeat;
   background-size: cover;      /* stretches to bottom of the screen */
   background-position: top center;
@@ -90,7 +110,7 @@ body.has-illustration {
 /* Art page wallpaper */
 body.has-illustration.art-bg {
   /* Provide the per-page image via variable */
-  --wallpaper-url: url('../images/projectpage.jpg');
+  --wallpaper-url: url('../images/projectpage.png');
   /* Optional: if you have a PNG you prefer on tablet sizes, set this variable in CSS or inline on body
      e.g. --wallpaper-url-tablet: url('../images/projectpage.png'); */
 }
@@ -102,7 +122,7 @@ body.has-illustration.notfound-bg {
 
 /* Optional: provide a mobile-specific image later if needed */
 
-@media (min-width: 701px) {
+@media (max-width: 600px) {
   body.has-illustration {
     background-attachment: fixed; /* subtle parallax on desktop */
   }
@@ -114,6 +134,8 @@ body.has-illustration.notfound-bg {
 }
 
 /* Preserve wallpaper aspect ratio on tall/narrow viewports (e.g., iPad portrait) */
+  /* mobile positions computed via JS */
+  .carousel-prev, .carousel-next { width:32px; height:32px; font-size:1.3rem; }
 @media (max-aspect-ratio: 3/4) {
   body.has-illustration {
     /* Prefer full image visibility on tall/narrow screens */
