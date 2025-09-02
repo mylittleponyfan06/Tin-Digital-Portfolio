@@ -3,7 +3,7 @@
 A clean, responsive personal portfolio to showcase my hobbies / creative projects, coding work, and background info!
 
 ## Structure
-- `index.html` – Landing page with featured projects..
+- `home.html` – Landing page with featured projects..
 - `data/` – JSON data you can edit without touching markup.
 
 
