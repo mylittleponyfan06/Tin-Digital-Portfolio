@@ -28,11 +28,24 @@ function showSlide(idx) {
   btn = `<a href="${link}" target="_blank" rel="noopener" class="btn outline" style="margin-top:1rem;">Official Product Site</a>`;
   }
   slideWrap.innerHTML = `
-  <img class="equipment-img" src="${slide.img}" alt="${slide.title}">
+    <img class="equipment-img" src="${slide.img}" alt="${slide.title}">
     <h4 style="margin:0 0 .5rem;">${slide.title}</h4>
     <p style="font-size:.92rem; color:#b2b9cc; margin:0;">${slide.desc}</p>
     ${btn}
   `;
+  // Show spinner until image loads
+  const modal = qs('#equipmentModal');
+  const spinner = qs('.equipment-modal__spinner', modal);
+  if (spinner) spinner.classList.add('show');
+  const img = qs('.equipment-img', slideWrap);
+  if (img) {
+    const done = () => { if (spinner) spinner.classList.remove('show'); positionArrows(); };
+    if (img.complete) done();
+    else {
+      img.addEventListener('load', done, { once:true });
+      img.addEventListener('error', done, { once:true });
+    }
+  }
   // Indicators
   const ind = qs('.carousel-indicators', qs('#equipmentModal'));
   ind.innerHTML = slides.map((_,i) => `<span class="carousel-dot${i===currentIdx?' active':''}" data-idx="${i}"></span>`).join('');
