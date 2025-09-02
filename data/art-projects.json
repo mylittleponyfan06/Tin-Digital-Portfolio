@@ -28,7 +28,7 @@
         "desc": "Stagg Pedalboard loaded with all gig essentials."
       },
       {
-        "img": "assets/images/mosky_power.jpg",
+        "img": "assets/images/mosky.png",
         "title": "Power Supply",
         "desc": "Mosky power supply for stable, noise-free operation."
       },
@@ -43,7 +43,7 @@
         "desc": "Effects Bakery Plain Bread Compressor for smooth dynamics."
       },
       {
-        "img": "assets/images/zoom_ms50g.jpg",
+        "img": "assets/images/zoom_ms50g.webp",
         "title": "Multi-effects",
         "desc": "Zoom MS-50g for versatile effects in one box."
       }

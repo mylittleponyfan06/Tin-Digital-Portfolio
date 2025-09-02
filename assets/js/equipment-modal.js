@@ -8,9 +8,9 @@ let slides = [];
 
 // Map slide index to official product URLs
 const productLinks = [
-  'https://staggmusic.com/en/products/view/UPC535-abs-case-for-guitar-effect-pedals-pedals-not-included', // Pedalboard Overview
+  'https://staggmusic.com/en/products/view/UPC535-abs-case-for-guitar-effect-pedals-pedals-not-included', // Pedalboard
   'https://www.moskyaudio.com/product/products-3-75.html', // Power Supply
-  '', // Fuzz Pedal (no link provided)
+  'https://www.facebook.com/share/v/19knkSG3yY/', // Fuzz Pedal 
   'https://effectsbakery.us/products/effects-bakery-plain-bread-compressor-eb-pbc-1', // Compressor
   'https://zoomcorp.com/en/jp/multi-effects/multistomp-pedals/ms-50g' // Multi-effects
 ];
@@ -20,7 +20,7 @@ function showSlide(idx) {
   currentIdx = (idx + slides.length) % slides.length;
   const slide = slides[currentIdx];
   const slideWrap = qs('.carousel-slide', qs('#equipmentModal'));
-  // Add button if product link exists for this slide
+
   let btn = '';
   const link = productLinks[currentIdx];
   if (link) {
