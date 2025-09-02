@@ -99,9 +99,9 @@ body {
 /* Use a CSS variable so pages can override the image (and provide a tablet-specific alternative). */
 body.has-illustration {
   /* Default wallpaper (can be overridden per page with --wallpaper-url) */
-  background-image: var(--wallpaper-url, url('../images/portfoliowallpaper.png'));
+  background-image: var(--wallpaper-url, url('../images/projectwallpaper.png'));
   background-repeat: no-repeat;
-  background-size: cover;      /* stretches to bottom of the screen */
+  background-size: contain;     /* always show full image, no cropping */
   background-position: top center;
   /* When the image doesn't fill (e.g., contain on tablet), show the site background color */
   background-color: var(--bg);
@@ -110,9 +110,8 @@ body.has-illustration {
 /* Art page wallpaper */
 body.has-illustration.art-bg {
   /* Provide the per-page image via variable */
-  --wallpaper-url: url('../images/projectpage.png');
-  /* Optional: if you have a PNG you prefer on tablet sizes, set this variable in CSS or inline on body
-     e.g. --wallpaper-url-tablet: url('../images/projectpage.png'); */
+  --wallpaper-url: url('../images/portfoliowallpaper.png');
+
 }
 
 /* 404 page wallpaper */
@@ -122,9 +121,9 @@ body.has-illustration.notfound-bg {
 
 /* Optional: provide a mobile-specific image later if needed */
 
-@media (max-width: 600px) {
+@media (min-width: 701px) {
   body.has-illustration {
-    background-attachment: fixed; /* subtle parallax on desktop */
+    background-attachment: fixed; /* keep wallpaper steady while scrolling on desktop */
   }
 }
 
@@ -139,7 +138,7 @@ body.has-illustration.notfound-bg {
 @media (max-aspect-ratio: 3/4) {
   body.has-illustration {
     /* Prefer full image visibility on tall/narrow screens */
-    background-image: var(--wallpaper-url-tablet, var(--wallpaper-url, url('../images/portfoliowallpaper.jpg')));
+  background-image: var(--wallpaper-url-tablet, var(--wallpaper-url, url('../images/projectwallpaper.png')));
     background-size: contain;   /* no cropping; may letterbox */
     background-color: var(--bg); /* fill any side gaps softly */
     background-position: top center;
@@ -151,7 +150,7 @@ body.has-illustration.notfound-bg {
 /* Also prefer contain on tablets (incl. iPad Pro) in landscape to avoid aggressive cropping */
 @media (max-width: 1366px) and (orientation: landscape) {
   body.has-illustration {
-    background-image: var(--wallpaper-url-tablet, var(--wallpaper-url, url('../images/portfoliowallpaper.jpg')));
+  background-image: var(--wallpaper-url-tablet, var(--wallpaper-url, url('../images/projectwallpaper.png')));
     background-attachment: scroll; /* avoid iPad repaint glitches */
     background-size: contain;
     background-position: top center;
