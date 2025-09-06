@@ -3,49 +3,51 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>About Me | My Digital Portfolio</title>
+  <title>Artsy Projects | My Digital Portfolio</title>
+  <link rel="preload" as="image" href="assets/images/portfoliowallpaper.png">
   <link rel="stylesheet" href="assets/css/style.css" />
 </head>
-<body>
+<body class="has-illustration art-bg">
   <header class="site-header">
     <nav class="nav" aria-label="Main navigation">
       <a class="logo" href="index.html">Tristin <span>ꉂ(˵˃ ᗜ ˂˵)</span></a>
       <button id="navToggle" class="nav__toggle" aria-expanded="false" aria-controls="navMenu">☰</button>
       <ul id="navMenu" class="nav__menu">
-  <li><a href="index.html">Home</a></li>
-  <li><a href="art-projects.html">Projects</a></li>
-  <li><a href="code-projects.html">Hobbies</a></li>
-  <li><a href="about.html" class="active">About me!</a></li>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="art-projects.html" class="active">Projects</a></li>
+        <li><a href="code-projects.html">Hobbies</a></li>
+        <li><a href="about.html">About me!</a></li>
       </ul>
     </nav>
   </header>
-  <main class="page about">
-    <header class="about__header">
-      <h1 class="page-title">About Me</h1>
-      <p class="page-intro">➽──────────────────❥</p>
-    </header>
-    <section class="about__grid">
-      <article class="about__section">
-        <h2>Who I Am</h2>
-  <p id="whoAmIInfo">HI!! I am Tristin (˶' ꒳ '˶).</p>
-      </article>
-      <article class="about__section">
-        <h2>Education</h2>
-        <ul class="timeline" id="educationTimeline"></ul>
-      </article>
-      <article class="about__section">
-        <h2>Skills</h2>
-        <div class="skills-toolbar">
-          <div id="skillsDots" class="skills-dots" aria-label="Select skills category"></div>
-        </div>
-        <div id="skillGroups"></div>
-      </article>
-      <article class="about__section">
-        <h2>Interests</h2>
-        <p>As a person I love personalizing everything i do with creativity and a touch of whimsy. I enjoy listening to and playing music in my spare time; Crochetting my ideas to life freehanded; And of course coding!</p>
-      </article>
-    </section>
+  <main class="page">
+    <h1 class="page-title">My Projects ദ്ദി ˉ͈̀꒳ˉ͈́ )✧</h1>
+    <p class="page-intro">✩‧₊˚─────⋆⋅☆⋅⋆─────˚₊‧✩</p>
+    <div class="filters" id="artFilters"></div>
+    <div class="cards" id="artProjectCards" aria-live="polite"></div>
   </main>
+  <!-- Equipment Specs Modal -->
+  <div id="equipmentModal" class="equipment-modal" style="display:none;">
+  <div class="equipment-modal__overlay"></div>
+  <!-- Static arrows outside scaled content -->
+  <button class="carousel-prev" aria-label="Previous">&#8592;</button>
+  <button class="carousel-next" aria-label="Next">&#8594;</button>
+  <div class="equipment-modal__content">
+      <button class="equipment-modal__close" aria-label="Close">&times;</button>
+  <div class="equipment-modal__spinner" aria-hidden="true"><div class="spinner" role="status" aria-label="Loading"></div></div>
+      <div class="equipment-carousel">
+        <div class="carousel-slide">
+          <!-- Image and text will be injected here -->
+        </div>
+      </div>
+      <div class="equipment-zoom" aria-label="Zoom controls">
+        <button type="button" class="zoom-out" title="Zoom out" aria-label="Zoom out">−</button>
+        <input type="range" class="zoom-range" min="0.8" max="1.8" step="0.05" value="1" aria-label="Zoom level" />
+        <button type="button" class="zoom-in" title="Zoom in" aria-label="Zoom in">+</button>
+      </div>
+      <div class="carousel-indicators"></div>
+    </div>
+  </div>
   <footer class="site-footer">
     <section class="contact-footer">
   <a class="btn primary" href="mailto:tristinsiM@gmail.com?subject=Portfolio%20Inquiry&body=Hi%20Tristin%2C%0D%0A%0D%0AMy%20name%20is%20...%0D%0AI%27d%20like%20to%20talk%20about%20...%0D%0A%0D%0AThanks!" aria-label="Email me">
@@ -70,7 +72,11 @@
       </div>
     </section>
   </footer>
-  <script type="module" src="assets/js/about.js"></script>
+  <script type="module" src="assets/js/art.js"></script>
   <script src="assets/js/page-transitions.js"></script>
+  <script type="module">
+    import { initEquipmentModal } from './assets/js/equipment-modal.js';
+    initEquipmentModal();
+  </script>
 </body>
 </html>

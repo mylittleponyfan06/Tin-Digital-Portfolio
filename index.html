@@ -7,6 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" as="image" href="assets/images/projectwallpaper.png">
   <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 <body class="has-illustration">
@@ -15,10 +16,10 @@
       <a class="logo" href="index.html">Tristin <span>ꉂ(˵˃ ᗜ ˂˵)</span></a>
       <button id="navToggle" class="nav__toggle" aria-expanded="false" aria-controls="navMenu">☰</button>
       <ul id="navMenu" class="nav__menu">
-        <li><a href="index.html" class="active">Home</a></li>
-        <li><a href="Projects.html">Projects</a></li>
-        <li><a href="Hobbies.html">Hobbies</a></li>
-        <li><a href="About.html">About me!</a></li>
+  <li><a href="index.html" class="active">Home</a></li>
+  <li><a href="art-projects.html">Projects</a></li>
+  <li><a href="code-projects.html">Hobbies</a></li>
+  <li><a href="about.html">About me!</a></li>
       </ul>
     </nav>
   </header>
@@ -28,7 +29,7 @@
         <h1>Hello!! I'm <span class="accent" id="yourName">Tristin</span></h1>
         <p class="lead">₊✧˚﹕︶︶︶﹕૮₍ ⸝⸝´ ꒳ `⸝⸝ ₎ა﹕︶︶︶﹕ ˚✧₊<br>This website is still a work in progres as im currently moving house right now! <br> A showcase of the things I build, play, and learn. <br> ꒰꒰・┄┄┄┄・♡・┄┄┄┄・꒱꒱ <br>All wallpapers are put together and drawn by me!</p>
         <div class="hero__actions">
-          <a href="Projects.html" class="btn primary">Explore my Projects</a>
+          <a href="art-projects.html" class="btn primary">Explore my Projects</a>
           <a href="wallpapers.html" class="btn outline">View wallpapers</a>
         </div>
       </div>
@@ -85,6 +86,7 @@
     </section>
   </footer>
   <script src="assets/js/main.js" type="module"></script>
+  <script src="assets/js/page-transitions.js"></script>
   <script type="module">
     import { initEquipmentModal } from './assets/js/equipment-modal.js';
     initEquipmentModal();

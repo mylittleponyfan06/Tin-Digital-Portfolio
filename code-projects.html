@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>About Me | My Digital Portfolio</title>
+  <title>Hobbies| My Digital Portfolio</title>
   <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 <body>
@@ -14,37 +14,19 @@
       <ul id="navMenu" class="nav__menu">
   <li><a href="index.html">Home</a></li>
   <li><a href="art-projects.html">Projects</a></li>
-  <li><a href="code-projects.html">Hobbies</a></li>
-  <li><a href="about.html" class="active">About me!</a></li>
+  <li><a href="code-projects.html" class="active">Hobbies</a></li>
+  <li><a href="about.html">About me!</a></li>
       </ul>
     </nav>
   </header>
-  <main class="page about">
-    <header class="about__header">
-      <h1 class="page-title">About Me</h1>
-      <p class="page-intro">➽──────────────────❥</p>
-    </header>
-    <section class="about__grid">
-      <article class="about__section">
-        <h2>Who I Am</h2>
-  <p id="whoAmIInfo">HI!! I am Tristin (˶' ꒳ '˶).</p>
-      </article>
-      <article class="about__section">
-        <h2>Education</h2>
-        <ul class="timeline" id="educationTimeline"></ul>
-      </article>
-      <article class="about__section">
-        <h2>Skills</h2>
-        <div class="skills-toolbar">
-          <div id="skillsDots" class="skills-dots" aria-label="Select skills category"></div>
-        </div>
-        <div id="skillGroups"></div>
-      </article>
-      <article class="about__section">
-        <h2>Interests</h2>
-        <p>As a person I love personalizing everything i do with creativity and a touch of whimsy. I enjoy listening to and playing music in my spare time; Crochetting my ideas to life freehanded; And of course coding!</p>
-      </article>
-    </section>
+  <main class="page">
+    <h1 class="page-title">My hobbies! <img class="title-icon" src="assets/images/neutraltemp.webp" alt="" aria-hidden="true"></h1>
+    <p class="page-intro">════════════════════════════════════<br>
+✦ . 　⁺ 　 . ✦ . 　⁺ 　 . ✦ . 　⁺ 　 . ✦ . 　⁺ 　 . ✦ . 　⁺ 　 . ✦ . 　<br>
+︶⊹︶︶୨୧︶︶⊹︶︶⊹︶︶୨୧︶︶⊹︶︶⊹︶︶୨୧︶︶⊹︶︶⊹</p>
+  <div class="filters" id="codeFilters"></div>
+  <input id="codeSearchInput" class="search-input" type="text" placeholder="Search by tag or keyword..." style="display:none; margin-top:0.7rem; width:100%; max-width:320px; padding:0.5rem 1rem; border-radius:8px; border:1px solid #222; background:#181b25; color:#fff; font-size:1rem;" />
+    <div class="cards" id="codeProjectCards" aria-live="polite"></div>
   </main>
   <footer class="site-footer">
     <section class="contact-footer">
@@ -70,7 +52,7 @@
       </div>
     </section>
   </footer>
-  <script type="module" src="assets/js/about.js"></script>
+  <script type="module" src="assets/js/code.js"></script>
   <script src="assets/js/page-transitions.js"></script>
 </body>
 </html>

@@ -344,3 +344,34 @@ body.has-illustration .hero h1 .accent {
 /* Animations */
 .fade-in { animation:fade .6s ease both; }
 @keyframes fade { from { opacity:0; transform:translateY(6px);} to { opacity:1; transform:none; } }
+
+/* Page transition overlay */
+.pt-overlay {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(135deg, #ffb7c5 0%, #b6e2a1 100%);
+  z-index: 2147483646;
+  pointer-events: none;
+  transform: translateZ(0) scaleX(0);
+  transform-origin: right;
+  backface-visibility: hidden;
+  will-change: transform;
+  visibility: hidden;
+}
+.pt-overlay.pt-exit {
+  transform-origin: left;
+  animation: pt-cover .5s cubic-bezier(.22,.61,.36,1) forwards;
+  visibility: visible;
+}
+.pt-overlay.pt-enter {
+  transform-origin: right;
+  animation: pt-uncover .5s cubic-bezier(.22,.61,.36,1) forwards;
+  visibility: visible;
+}
+@keyframes pt-cover { from { transform: scaleX(0);} to { transform: scaleX(1);} }
+@keyframes pt-uncover { from { transform: scaleX(1);} to { transform: scaleX(0);} }
+
+/* Content fade to make the effect feel smoother */
+body.pt-enter main { opacity:.0; transform: translateY(4px); }
+body.pt-enter.pt-on main { opacity:1; transform:none; transition: opacity .36s cubic-bezier(.22,.61,.36,1), transform .36s cubic-bezier(.22,.61,.36,1); }
+body.pt-leave main { opacity:.82; filter: saturate(1.02) blur(.2px); transform: translateY(2px); transition: opacity .24s ease, filter .24s ease, transform .24s ease; }
