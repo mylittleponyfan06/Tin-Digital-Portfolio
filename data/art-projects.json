@@ -13,7 +13,21 @@
     "tags": ["FSDP", "Coding", "GenAI", "CloudTiDB", "AWS", "GitHub"],
     "featured": true,
     "image": "assets/images/Lynkistrylogo.png",
-    "links": { "github": "https://github.com/RKaiWut/Lynkistry" }
+    "links": {
+      "githubPrivate": true,
+      "githubPrivateMessage": "Lynkistry repo is private right now. I can share a walkthrough, screenshots, or access details on request."
+    }
+  },
+  {
+    "title": "Bookworms Online",
+    "subtitle": "Application security membership login web page focused on IT fundamentals. <br> -========- <br> Built with protection against CSRF, XSS, and SQL injection. Includes 2FA (authenticator app + Maileroo email/SMS OTP flow), Google reCAPTCHA v3, encrypted credit-card data handling, and salted + hashed passwords. <br><br> Repository is currently private.",
+    "tags": ["Coding", "Application Security", "2FA", "IT Fundamentals", "OWASP"],
+    "featured": true,
+    "image": "assets/images/bookwormsonline.png",
+    "links": {
+      "githubPrivate": true,
+      "githubPrivateMessage": "Bookworms Online repo is private right now. I can share the architecture and security implementation details on request."
+    }
   },
     {
     "title": "Indie band: Keith",

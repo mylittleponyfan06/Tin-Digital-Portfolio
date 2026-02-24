@@ -20,10 +20,73 @@ export async function loadJSON(path) {
   return res.json();
 }
 
+function escapeAttr(value = '') {
+  return String(value)
+    .replaceAll('&', '&amp;')
+    .replaceAll('"', '&quot;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;');
+}
+
+let privateRepoToastEl = null;
+let privateRepoToastTimer = null;
+
+function getPrivateRepoToast() {
+  if (privateRepoToastEl) return privateRepoToastEl;
+  const toast = document.createElement('div');
+  toast.className = 'private-repo-toast';
+  toast.setAttribute('role', 'status');
+  toast.setAttribute('aria-live', 'polite');
+  document.body.appendChild(toast);
+  privateRepoToastEl = toast;
+  return privateRepoToastEl;
+}
+
+function showPrivateRepoToast(message) {
+  const toast = getPrivateRepoToast();
+  toast.textContent = message || 'This GitHub repository is currently private.';
+  toast.classList.add('show');
+
+  if (privateRepoToastTimer) window.clearTimeout(privateRepoToastTimer);
+  privateRepoToastTimer = window.setTimeout(() => {
+    toast.classList.remove('show');
+  }, 2300);
+}
+
+function bindPrivateRepoButtons(container) {
+  if (!container || container.dataset.privateRepoBound === 'true') return;
+
+  container.addEventListener('click', (e) => {
+    const btn = e.target.closest('.btn-private-repo');
+    if (!btn) return;
+    const msg = btn.getAttribute('data-private-message') || 'This GitHub repository is currently private.';
+    btn.classList.remove('is-notified');
+    void btn.offsetWidth;
+    btn.classList.add('is-notified');
+    window.setTimeout(() => btn.classList.remove('is-notified'), 420);
+    showPrivateRepoToast(msg);
+  });
+
+  container.dataset.privateRepoBound = 'true';
+}
+
 export function renderProjectCards(projects, container) {
   if (!container) return;
+  bindPrivateRepoButtons(container);
+
   container.innerHTML = projects.map(p => {
     const isPedalboard = p.title === "Pedalboard Layout" && Array.isArray(p.equipment);
+    const privateRepoMessage = p.links?.githubPrivateMessage || 'This GitHub repository is currently private.';
+    const privateRepoLabel = p.links?.githubPrivateLabel || 'GitHub';
+    const privateRepoHint = p.links?.githubPrivateHint || 'Private repo - click for details';
+    const safePrivateRepoLabel = escapeAttr(privateRepoLabel);
+    const safePrivateRepoHint = escapeAttr(privateRepoHint);
+    const githubAction = p.links?.githubPrivate
+      ? `<button class="btn outline btn-private-repo" type="button" data-private-message="${escapeAttr(privateRepoMessage)}" aria-label="${safePrivateRepoLabel} (${safePrivateRepoHint})" title="${escapeAttr(privateRepoMessage)}"><span class="btn-private-repo__title">${safePrivateRepoLabel}</span><span class="btn-private-repo__hint">${safePrivateRepoHint}</span></button>`
+      : p.links?.github
+        ? `<a class="btn outline" target="_blank" rel="noopener" href="${p.links.github}">GitHub</a>`
+        : '';
+
     return `
       <article class="card fade-in">
         ${p.image ? `<img src="${p.image}" alt="${p.title} image" loading="lazy" style="border-radius:12px;">` : ''}
@@ -32,7 +95,7 @@ export function renderProjectCards(projects, container) {
         <div class="tags">${p.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>
         <div class="links" style="margin-top:.6rem; display:flex; gap:.5rem; flex-wrap:wrap;">
           ${p.links?.demo ? `<a class="btn outline" target="_blank" rel="noopener" href="${p.links.demo}">Demo</a>` : ''}
-          ${p.links?.github ? `<a class="btn outline" target="_blank" rel="noopener" href="${p.links.github}">GitHub</a>` : ''}
+          ${githubAction}
           ${p.links?.BMOS ? `<a class="btn outline" target="_blank" rel="noopener" href="${p.links.BMOS}">BMOS gig recording</a>` : ''}
           ${p.links?.readMore ? `<a class="btn" href="${p.links.readMore}">Read</a>` : ''}
           ${p.links?.Rainmeter ? `<a class="btn outline" target="_blank" rel="noopener" href="${p.links.Rainmeter}">View/Download here!</a>` : ''}
