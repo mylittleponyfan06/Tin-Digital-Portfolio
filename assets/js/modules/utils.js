@@ -86,6 +86,11 @@ export function renderProjectCards(projects, container) {
       : p.links?.github
         ? `<a class="btn outline" target="_blank" rel="noopener" href="${p.links.github}">GitHub</a>`
         : '';
+    const bmosAction = p.links?.BMOS
+      ? `<a class="btn outline" target="_blank" rel="noopener" href="${p.links.BMOS}">BMOS gig recording</a>`
+      : p.links?.BMOSPlaceholder
+        ? `<span class="btn outline" aria-disabled="true">${escapeAttr(p.links.BMOSPlaceholder)}</span>`
+        : '';
 
     return `
       <article class="card fade-in">
@@ -96,7 +101,7 @@ export function renderProjectCards(projects, container) {
         <div class="links" style="margin-top:.6rem; display:flex; gap:.5rem; flex-wrap:wrap;">
           ${p.links?.demo ? `<a class="btn outline" target="_blank" rel="noopener" href="${p.links.demo}">Demo</a>` : ''}
           ${githubAction}
-          ${p.links?.BMOS ? `<a class="btn outline" target="_blank" rel="noopener" href="${p.links.BMOS}">BMOS gig recording</a>` : ''}
+          ${bmosAction}
           ${p.links?.readMore ? `<a class="btn" href="${p.links.readMore}">Read</a>` : ''}
           ${p.links?.Rainmeter ? `<a class="btn outline" target="_blank" rel="noopener" href="${p.links.Rainmeter}">View/Download here!</a>` : ''}
           ${isPedalboard ? `<button class="btn outline equipment-specs-btn" data-equipment='${JSON.stringify(p.equipment)}'>Equipment Specs</button>` : ''}

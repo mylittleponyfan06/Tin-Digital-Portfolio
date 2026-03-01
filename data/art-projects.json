@@ -29,13 +29,13 @@
       "githubPrivateMessage": "Bookworms Online repo is private right now. I can share the architecture and security implementation details on request."
     }
   },
-    {
+  {
     "title": "Indie band: Keith",
     "subtitle": "Live gig performances with my band <b>\"Keith\"</b>! <br> Comprising of Nanyang Poly students from the schools: Information Technology, Engingeering, and Nursing.",
     "tags": ["gig", "live", "Guitar"],
     "featured": true,
     "image": "assets/images/Keith_cover.jpg",
-    "links": { "BMOS": "https://youtu.be/cYLIr5dLnrY" }
+    "links": { "BMOSPlaceholder": "BMOS gig recording coming soon" }
   },
   {
     "title": "Pedalboard Layout",
