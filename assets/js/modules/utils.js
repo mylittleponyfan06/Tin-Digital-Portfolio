@@ -14,8 +14,26 @@ export function applyYear() {
   if (el) el.textContent = String(new Date().getFullYear());
 }
 
+export function toSitePath(path = '') {
+  const value = String(path || '').trim();
+  if (
+    !value ||
+    value.startsWith('/') ||
+    value.startsWith('#') ||
+    value.startsWith('//') ||
+    value.startsWith('mailto:') ||
+    value.startsWith('tel:') ||
+    value.startsWith('data:') ||
+    /^[a-z][a-z0-9+.-]*:/i.test(value)
+  ) {
+    return value;
+  }
+
+  return `/${value.replace(/^\.?\//, '')}`;
+}
+
 export async function loadJSON(path) {
-  const res = await fetch(path);
+  const res = await fetch(toSitePath(path));
   if (!res.ok) throw new Error(`Failed to fetch ${path}`);
   return res.json();
 }
@@ -76,35 +94,47 @@ export function renderProjectCards(projects, container) {
 
   container.innerHTML = projects.map(p => {
     const isPedalboard = p.title === "Pedalboard Layout" && Array.isArray(p.equipment);
+    const imageSrc = p.image ? escapeAttr(toSitePath(p.image)) : '';
     const privateRepoMessage = p.links?.githubPrivateMessage || 'This GitHub repository is currently private.';
     const privateRepoLabel = p.links?.githubPrivateLabel || 'GitHub';
     const privateRepoHint = p.links?.githubPrivateHint || 'Private repo - click for details';
     const safePrivateRepoLabel = escapeAttr(privateRepoLabel);
     const safePrivateRepoHint = escapeAttr(privateRepoHint);
+    const demoLink = escapeAttr(toSitePath(p.links?.demo || ''));
+    const githubLink = escapeAttr(toSitePath(p.links?.github || ''));
+    const bmosLink = escapeAttr(toSitePath(p.links?.BMOS || ''));
+    const readMoreLink = escapeAttr(toSitePath(p.links?.readMore || ''));
+    const rainmeterLink = escapeAttr(toSitePath(p.links?.Rainmeter || ''));
+    const equipmentData = isPedalboard
+      ? escapeAttr(JSON.stringify(p.equipment.map(slide => ({
+          ...slide,
+          img: toSitePath(slide.img)
+        }))))
+      : '';
     const githubAction = p.links?.githubPrivate
       ? `<button class="btn outline btn-private-repo" type="button" data-private-message="${escapeAttr(privateRepoMessage)}" aria-label="${safePrivateRepoLabel} (${safePrivateRepoHint})" title="${escapeAttr(privateRepoMessage)}"><span class="btn-private-repo__title">${safePrivateRepoLabel}</span><span class="btn-private-repo__hint">${safePrivateRepoHint}</span></button>`
       : p.links?.github
-        ? `<a class="btn outline" target="_blank" rel="noopener" href="${p.links.github}">GitHub</a>`
+        ? `<a class="btn outline" target="_blank" rel="noopener" href="${githubLink}">GitHub</a>`
         : '';
     const bmosAction = p.links?.BMOS
-      ? `<a class="btn outline" target="_blank" rel="noopener" href="${p.links.BMOS}">BMOS gig recording</a>`
+      ? `<a class="btn outline" target="_blank" rel="noopener" href="${bmosLink}">BMOS gig recording</a>`
       : p.links?.BMOSPlaceholder
         ? `<span class="btn outline" aria-disabled="true">${escapeAttr(p.links.BMOSPlaceholder)}</span>`
         : '';
 
     return `
       <article class="card fade-in">
-        ${p.image ? `<img src="${p.image}" alt="${p.title} image" loading="lazy" style="border-radius:12px;">` : ''}
+        ${p.image ? `<img src="${imageSrc}" alt="${escapeAttr(p.title)} image" loading="lazy" style="border-radius:12px;">` : ''}
         <h3>${p.title}</h3>
         ${p.subtitle ? `<p>${p.subtitle}</p>` : ''}
         <div class="tags">${p.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>
         <div class="links" style="margin-top:.6rem; display:flex; gap:.5rem; flex-wrap:wrap;">
-          ${p.links?.demo ? `<a class="btn outline" target="_blank" rel="noopener" href="${p.links.demo}">Demo</a>` : ''}
+          ${p.links?.demo ? `<a class="btn outline" target="_blank" rel="noopener" href="${demoLink}">Demo</a>` : ''}
           ${githubAction}
           ${bmosAction}
-          ${p.links?.readMore ? `<a class="btn" href="${p.links.readMore}">Read</a>` : ''}
-          ${p.links?.Rainmeter ? `<a class="btn outline" target="_blank" rel="noopener" href="${p.links.Rainmeter}">View/Download here!</a>` : ''}
-          ${isPedalboard ? `<button class="btn outline equipment-specs-btn" data-equipment='${JSON.stringify(p.equipment)}'>Equipment Specs</button>` : ''}
+          ${p.links?.readMore ? `<a class="btn" href="${readMoreLink}">Read</a>` : ''}
+          ${p.links?.Rainmeter ? `<a class="btn outline" target="_blank" rel="noopener" href="${rainmeterLink}">View/Download here!</a>` : ''}
+          ${isPedalboard ? `<button class="btn outline equipment-specs-btn" data-equipment="${equipmentData}">Equipment Specs</button>` : ''}
         </div>
       </article>
     `;
