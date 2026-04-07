@@ -9,7 +9,7 @@
   },
   {
     "title": "Lynkistry",
-    "subtitle": "Full-stack web application in collaboration with Singapore Chinese Chamber of Commerce and Industry (SCCCI) member companies in the insurance and finance sector. <br> -========- <br>Github page currently privated!",
+    "subtitle": "Full-stack web application in collaboration with Singapore Chinese Chamber of Commerce and Industry (SCCCI) member companies in the insurance and finance sector. <br> -========-",
     "tags": ["FSDP", "Coding", "GenAI", "CloudTiDB", "AWS", "GitHub"],
     "featured": true,
     "image": "assets/images/Lynkistrylogo.png",
@@ -20,7 +20,7 @@
   },
   {
     "title": "Bookworms Online",
-    "subtitle": "Application security membership login web page focused on IT fundamentals. <br> -========- <br> Built with protection against CSRF, XSS, and SQL injection. Includes 2FA (authenticator app + Maileroo email/SMS OTP flow), Google reCAPTCHA v3, encrypted credit-card data handling, and salted + hashed passwords. <br><br> Repository is currently private.",
+    "subtitle": "Application security membership login web page focused on IT fundamentals. <br> -========- <br> Built with protection against CSRF, XSS, and SQL injection. Includes 2FA (authenticator app + Maileroo email/SMS OTP flow), Google reCAPTCHA v3, encrypted credit-card data handling, and salted + hashed passwords.",
     "tags": ["Coding", "Application Security", "2FA", "IT Fundamentals", "OWASP"],
     "featured": true,
     "image": "assets/images/bookwormsonline.png",
