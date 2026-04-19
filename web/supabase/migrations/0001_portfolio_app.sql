@@ -588,6 +588,10 @@ begin
     raise exception 'Clue already submitted';
   end if;
 
+  update public.room_players
+  set updated_at = timezone('utc', now())
+  where id = v_member_id;
+
   if not exists (
     select 1
     from public.player_prompts pp

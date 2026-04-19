@@ -10,8 +10,8 @@ import {
   submitClueAction,
   toggleReadyAction,
 } from "@/lib/actions/imposter";
-import { createClient } from "@/lib/supabase/browser";
 import type { ImposterRoomSnapshot } from "@/lib/imposter/types";
+import { createClient } from "@/lib/supabase/browser";
 import { buttonStyles, cn } from "@/lib/utils";
 
 type ImposterRoomClientProps = {
@@ -27,17 +27,19 @@ export function ImposterRoomClient({ snapshot }: ImposterRoomClientProps) {
   const currentPlayer = snapshot.players.find((player) => player.id === snapshot.currentPlayerId);
   const currentRound = snapshot.currentRound;
   const submittedCount = currentRound?.clues.filter((entry) => entry.hasSubmitted).length ?? 0;
-  const everyoneReady = snapshot.players.length >= 3 && snapshot.players.every((player) => player.isReady);
+  const everyoneReady =
+    snapshot.players.length >= 3 && snapshot.players.every((player) => player.isReady);
   const canStartRound =
     currentPlayer?.isHost &&
     (snapshot.room.status === "lobby" || snapshot.room.status === "results") &&
     everyoneReady;
   const hasSubmittedClue =
-    currentRound?.clues.find((entry) => entry.roomPlayerId === snapshot.currentPlayerId)?.hasSubmitted ??
-    false;
+    currentRound?.clues.find((entry) => entry.roomPlayerId === snapshot.currentPlayerId)
+      ?.hasSubmitted ?? false;
   const hasVoted =
     currentRound?.votes.some((vote) => vote.voterPlayerId === snapshot.currentPlayerId) ?? false;
   const roomPath = `/games/imposter/rooms/${snapshot.room.code}`;
+  const roundId = currentRound?.id;
 
   useEffect(() => {
     const supabase = createClient();
@@ -75,12 +77,12 @@ export function ImposterRoomClient({ snapshot }: ImposterRoomClientProps) {
         refresh,
       );
 
-    if (currentRound) {
+    if (roundId) {
       channel.on(
         "postgres_changes",
         {
           event: "*",
-          filter: `round_id=eq.${currentRound.id}`,
+          filter: `round_id=eq.${roundId}`,
           schema: "public",
           table: "votes",
         },
@@ -93,7 +95,7 @@ export function ImposterRoomClient({ snapshot }: ImposterRoomClientProps) {
     return () => {
       void supabase.removeChannel(channel);
     };
-  }, [currentRound, router, snapshot.room.id]);
+  }, [roundId, router, snapshot.room.id]);
 
   if (!currentPlayer) {
     return (
@@ -105,6 +107,7 @@ export function ImposterRoomClient({ snapshot }: ImposterRoomClientProps) {
 
   async function runAction(task: Promise<{ error?: string; redirectTo?: string; ok?: true }>) {
     const result = await task;
+
     if (result.error) {
       setFeedback(result.error);
       return;
@@ -151,7 +154,12 @@ export function ImposterRoomClient({ snapshot }: ImposterRoomClientProps) {
                 disabled={isPending}
                 onClick={() =>
                   startTransition(() =>
-                    runAction(toggleReadyAction({ isReady: !currentPlayer.isReady, roomCode: snapshot.room.code })),
+                    runAction(
+                      toggleReadyAction({
+                        isReady: !currentPlayer.isReady,
+                        roomCode: snapshot.room.code,
+                      }),
+                    ),
                   )
                 }
                 type="button"
@@ -175,7 +183,9 @@ export function ImposterRoomClient({ snapshot }: ImposterRoomClientProps) {
           <div className="mt-6 grid gap-4 sm:grid-cols-3">
             <div className="rounded-3xl border border-white/10 bg-white/5 p-4">
               <p className="text-xs uppercase tracking-[0.22em] text-slate-400">Host</p>
-              <p className="mt-2 text-lg text-white">{getPlayerName(snapshot.players.find((p) => p.isHost)?.id)}</p>
+              <p className="mt-2 text-lg text-white">
+                {getPlayerName(snapshot.players.find((player) => player.isHost)?.id)}
+              </p>
             </div>
             <div className="rounded-3xl border border-white/10 bg-white/5 p-4">
               <p className="text-xs uppercase tracking-[0.22em] text-slate-400">Players</p>
@@ -272,7 +282,8 @@ export function ImposterRoomClient({ snapshot }: ImposterRoomClientProps) {
               {currentRound.status === "collecting_clues" ? (
                 <div className="rounded-[1.6rem] border border-white/10 bg-white/5 p-5">
                   <p className="text-sm text-slate-300">
-                    Submit a short clue from your device. Everyone else sees the same topic. The imposter does not.
+                    Submit a short clue from your device. Everyone else sees the same topic. The imposter
+                    does not.
                   </p>
 
                   {hasSubmittedClue ? (
@@ -378,7 +389,7 @@ export function ImposterRoomClient({ snapshot }: ImposterRoomClientProps) {
                     {currentRound.results.detectedPlayerId ? (
                       <>
                         {" "}
-                        · Most votes:{" "}
+                        / Most votes:{" "}
                         <span className="text-white">
                           {getPlayerName(currentRound.results.detectedPlayerId)}
                         </span>

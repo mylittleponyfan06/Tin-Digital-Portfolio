@@ -5,6 +5,8 @@
   --accent-strong: #ffbb7d;
   --background: #0a1020;
   --foreground: #edf2ff;
+  --font-display: "Avenir Next", "Trebuchet MS", "Segoe UI", sans-serif;
+  --font-geist-mono: "IBM Plex Mono", "SFMono-Regular", "Consolas", monospace;
 }
 
 @theme inline {

@@ -6,34 +6,41 @@ export type Json =
   | { [key: string]: Json | undefined }
   | Json[];
 
+type TableDefinition<Row, Insert, Update> = {
+  Row: Row;
+  Insert: Insert;
+  Update: Update;
+  Relationships: [];
+};
+
 export type Database = {
   public: {
     Tables: {
-      imposter_topics: {
-        Row: {
+      imposter_topics: TableDefinition<
+        {
           category: string;
           created_at: string;
           id: string;
           is_active: boolean;
           prompt: string;
-        };
-        Insert: {
+        },
+        {
           category?: string;
           created_at?: string;
           id?: string;
           is_active?: boolean;
           prompt: string;
-        };
-        Update: {
+        },
+        {
           category?: string;
           created_at?: string;
           id?: string;
           is_active?: boolean;
           prompt?: string;
-        };
-      };
-      leaderboard_entries: {
-        Row: {
+        }
+      >;
+      leaderboard_entries: TableDefinition<
+        {
           crew_wins: number;
           display_name: string;
           game_slug: "imposter";
@@ -43,8 +50,8 @@ export type Database = {
           updated_at: string;
           user_id: string;
           wins: number;
-        };
-        Insert: {
+        },
+        {
           crew_wins?: number;
           display_name: string;
           game_slug?: "imposter";
@@ -54,8 +61,8 @@ export type Database = {
           updated_at?: string;
           user_id: string;
           wins?: number;
-        };
-        Update: {
+        },
+        {
           crew_wins?: number;
           display_name?: string;
           game_slug?: "imposter";
@@ -65,10 +72,10 @@ export type Database = {
           updated_at?: string;
           user_id?: string;
           wins?: number;
-        };
-      };
-      player_prompts: {
-        Row: {
+        }
+      >;
+      player_prompts: TableDefinition<
+        {
           created_at: string;
           id: string;
           is_imposter: boolean;
@@ -77,8 +84,8 @@ export type Database = {
           round_id: string;
           submitted_at: string | null;
           submitted_clue: string | null;
-        };
-        Insert: {
+        },
+        {
           created_at?: string;
           id?: string;
           is_imposter?: boolean;
@@ -87,8 +94,8 @@ export type Database = {
           round_id: string;
           submitted_at?: string | null;
           submitted_clue?: string | null;
-        };
-        Update: {
+        },
+        {
           created_at?: string;
           id?: string;
           is_imposter?: boolean;
@@ -97,10 +104,10 @@ export type Database = {
           round_id?: string;
           submitted_at?: string | null;
           submitted_clue?: string | null;
-        };
-      };
-      profiles: {
-        Row: {
+        }
+      >;
+      profiles: TableDefinition<
+        {
           avatar_url: string | null;
           bio: string | null;
           created_at: string;
@@ -108,8 +115,8 @@ export type Database = {
           id: string;
           updated_at: string;
           username: string | null;
-        };
-        Insert: {
+        },
+        {
           avatar_url?: string | null;
           bio?: string | null;
           created_at?: string;
@@ -117,8 +124,8 @@ export type Database = {
           id: string;
           updated_at?: string;
           username?: string | null;
-        };
-        Update: {
+        },
+        {
           avatar_url?: string | null;
           bio?: string | null;
           created_at?: string;
@@ -126,10 +133,10 @@ export type Database = {
           id?: string;
           updated_at?: string;
           username?: string | null;
-        };
-      };
-      room_players: {
-        Row: {
+        }
+      >;
+      room_players: TableDefinition<
+        {
           display_name: string;
           has_left: boolean;
           id: string;
@@ -140,8 +147,8 @@ export type Database = {
           score: number;
           updated_at: string;
           user_id: string;
-        };
-        Insert: {
+        },
+        {
           display_name: string;
           has_left?: boolean;
           id?: string;
@@ -152,8 +159,8 @@ export type Database = {
           score?: number;
           updated_at?: string;
           user_id: string;
-        };
-        Update: {
+        },
+        {
           display_name?: string;
           has_left?: boolean;
           id?: string;
@@ -164,10 +171,10 @@ export type Database = {
           score?: number;
           updated_at?: string;
           user_id?: string;
-        };
-      };
-      rooms: {
-        Row: {
+        }
+      >;
+      rooms: TableDefinition<
+        {
           code: string;
           created_at: string;
           game_slug: "imposter";
@@ -175,8 +182,8 @@ export type Database = {
           id: string;
           status: "lobby" | "collecting_clues" | "voting" | "results" | "closed";
           updated_at: string;
-        };
-        Insert: {
+        },
+        {
           code: string;
           created_at?: string;
           game_slug?: "imposter";
@@ -184,8 +191,8 @@ export type Database = {
           id?: string;
           status?: "lobby" | "collecting_clues" | "voting" | "results" | "closed";
           updated_at?: string;
-        };
-        Update: {
+        },
+        {
           code?: string;
           created_at?: string;
           game_slug?: "imposter";
@@ -193,10 +200,10 @@ export type Database = {
           id?: string;
           status?: "lobby" | "collecting_clues" | "voting" | "results" | "closed";
           updated_at?: string;
-        };
-      };
-      rounds: {
-        Row: {
+        }
+      >;
+      rounds: TableDefinition<
+        {
           ended_at: string | null;
           id: string;
           imposter_room_player_id: string;
@@ -207,8 +214,8 @@ export type Database = {
           status: "collecting_clues" | "voting" | "results" | "completed";
           topic: string;
           winner: "crew" | "imposter" | "draw" | null;
-        };
-        Insert: {
+        },
+        {
           ended_at?: string | null;
           id?: string;
           imposter_room_player_id: string;
@@ -219,8 +226,8 @@ export type Database = {
           status?: "collecting_clues" | "voting" | "results" | "completed";
           topic: string;
           winner?: "crew" | "imposter" | "draw" | null;
-        };
-        Update: {
+        },
+        {
           ended_at?: string | null;
           id?: string;
           imposter_room_player_id?: string;
@@ -231,32 +238,33 @@ export type Database = {
           status?: "collecting_clues" | "voting" | "results" | "completed";
           topic?: string;
           winner?: "crew" | "imposter" | "draw" | null;
-        };
-      };
-      votes: {
-        Row: {
+        }
+      >;
+      votes: TableDefinition<
+        {
           created_at: string;
           id: string;
           round_id: string;
           target_room_player_id: string;
           voter_room_player_id: string;
-        };
-        Insert: {
+        },
+        {
           created_at?: string;
           id?: string;
           round_id: string;
           target_room_player_id: string;
           voter_room_player_id: string;
-        };
-        Update: {
+        },
+        {
           created_at?: string;
           id?: string;
           round_id?: string;
           target_room_player_id?: string;
           voter_room_player_id?: string;
-        };
-      };
+        }
+      >;
     };
+    Views: Record<never, never>;
     Functions: {
       cast_imposter_vote: {
         Args: {
@@ -317,6 +325,13 @@ export type Database = {
         Returns: string;
       };
     };
+    Enums: {
+      game_slug: "imposter";
+      room_status: "lobby" | "collecting_clues" | "voting" | "results" | "closed";
+      round_status: "collecting_clues" | "voting" | "results" | "completed";
+      round_winner: "crew" | "imposter" | "draw";
+    };
+    CompositeTypes: Record<never, never>;
   };
 };
 

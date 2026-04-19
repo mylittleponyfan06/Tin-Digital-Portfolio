@@ -84,11 +84,18 @@ Environment variables used by the app:
 - `NEXT_PUBLIC_SUPABASE_URL`
 - `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`
 
+Use the exact production hostname you actually serve. This project is now standardized on `https://qwiosky.lol`. Keep Vercel, Supabase Site URL, and this env var consistent.
+
 The app uses a URL helper that supports:
 
 - `http://localhost:3000`
-- Vercel preview deployments via `NEXT_PUBLIC_VERCEL_URL`
+- Vercel preview deployments via the auto-provided `VERCEL_URL`
 - production via `NEXT_PUBLIC_SITE_URL`
+
+Optional note:
+
+- `VERCEL_PROJECT_PRODUCTION_URL` and `VERCEL_URL` are provided by Vercel on the server side.
+- You usually only need to set `NEXT_PUBLIC_SITE_URL` yourself for the production domain.
 
 Recommended Supabase redirect URL configuration:
 
@@ -122,6 +129,7 @@ Notes:
 2. Run `supabase/migrations/0001_portfolio_app.sql`.
 3. Verify the tables were added to the `supabase_realtime` publication.
 4. Confirm auth email settings and redirect URLs.
+5. Run `npm run check:backend` from `web/` to confirm the configured Supabase URL behaves like an API endpoint.
 
 ## Realtime architecture
 
@@ -206,6 +214,7 @@ Then, over time:
 cd web
 cp .env.example .env.local
 npm install
+npm run check:backend
 npm run dev
 ```
 

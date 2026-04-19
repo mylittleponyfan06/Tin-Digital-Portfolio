@@ -18,7 +18,7 @@ export function SiteFooter() {
           {roadmapPhases.map((phase) => (
             <div key={phase.title} className="rounded-3xl border border-white/10 bg-white/5 p-4">
               <p className="font-medium text-white">{phase.title}</p>
-              <p className="mt-2 leading-6 text-slate-300">{phase.items.slice(0, 3).join(" · ")}</p>
+              <p className="mt-2 leading-6 text-slate-300">{phase.items.slice(0, 3).join(" / ")}</p>
             </div>
           ))}
         </div>

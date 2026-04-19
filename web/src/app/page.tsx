@@ -105,7 +105,7 @@ export default async function HomePage() {
             {skillGroups.map((group) => (
               <div key={group.title}>
                 <p className="font-medium text-white">{group.title}</p>
-                <p className="mt-2 text-sm leading-7 text-slate-300">{group.items.join(" · ")}</p>
+                <p className="mt-2 text-sm leading-7 text-slate-300">{group.items.join(" / ")}</p>
               </div>
             ))}
           </div>
@@ -117,7 +117,7 @@ export default async function HomePage() {
             {roadmapPhases.map((phase) => (
               <div key={phase.title} className="rounded-[1.6rem] border border-white/10 bg-white/5 p-4">
                 <p className="font-medium text-white">{phase.title}</p>
-                <p className="mt-3 text-sm leading-7 text-slate-300">{phase.items.join(" · ")}</p>
+                <p className="mt-3 text-sm leading-7 text-slate-300">{phase.items.join(" / ")}</p>
               </div>
             ))}
           </div>

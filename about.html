@@ -2,15 +2,75 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta http-equiv="refresh" content="0; url=/about.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Redirecting...</title>
-  <link rel="canonical" href="/about.html" />
-  <script>
-    window.location.replace('/about.html');
-  </script>
+  <title>About Me | My Digital Portfolio</title>
+  <link rel="stylesheet" href="/assets/css/style.css" />
 </head>
 <body>
-  <p>Redirecting to <a href="/about.html">/about.html</a>...</p>
+  <header class="site-header">
+    <nav class="nav" aria-label="Main navigation">
+      <a class="logo" href="/index.html">Tristin <span>ꉂ(˵˃ ᗜ ˂˵)</span></a>
+      <button id="navToggle" class="nav__toggle" aria-expanded="false" aria-controls="navMenu">☰</button>
+      <ul id="navMenu" class="nav__menu">
+        <li><a href="/index.html">Home</a></li>
+        <li><a href="/art-projects.html">Projects</a></li>
+        <li><a href="/code-projects.html">Hobbies</a></li>
+        <li><a href="/about.html" class="active">About me!</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main class="page about">
+    <header class="about__header">
+      <h1 class="page-title">About Me</h1>
+      <p class="page-intro">➽──────────────────❥</p>
+    </header>
+    <section class="about__grid">
+      <article class="about__section">
+        <h2>Who I Am</h2>
+        <p id="whoAmIInfo">HI!! I am Tristin (˶' ꒳ '˶).</p>
+      </article>
+      <article class="about__section">
+        <h2>Education</h2>
+        <ul class="timeline" id="educationTimeline"></ul>
+      </article>
+      <article class="about__section">
+        <h2>Skills</h2>
+        <div class="skills-toolbar">
+          <div id="skillsDots" class="skills-dots" aria-label="Select skills category"></div>
+        </div>
+        <div id="skillGroups"></div>
+      </article>
+      <article class="about__section">
+        <h2>Interests</h2>
+        <p>As a person I love personalizing everything i do with creativity and a touch of whimsy. I enjoy listening to and playing music in my spare time; Crochetting my ideas to life freehanded; And of course coding!</p>
+      </article>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <section class="contact-footer">
+      <a class="btn primary" href="mailto:tristinsiM@gmail.com?subject=Portfolio%20Inquiry&body=Hi%20Tristin%2C%0D%0A%0D%0AMy%20name%20is%20...%0D%0AI%27d%20like%20to%20talk%20about%20...%0D%0A%0D%0AThanks!" aria-label="Email me">
+        <span>Email me</span>
+      </a>
+      <div class="social-links icon-row">
+        <a class="icon-link" href="https://github.com/mylittleponyfan06" target="_blank" rel="noopener" aria-label="GitHub profile">
+          <img src="/assets/images/github-mark-white.png" alt="" aria-hidden="true" />
+          <span class="tooltip">GitHub</span>
+          <span class="sr-only">GitHub</span>
+        </a>
+        <a class="icon-link" href="https://www.linkedin.com/in/tristin-sim-057a6b247?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" target="_blank" rel="noopener" aria-label="LinkedIn profile">
+          <img src="/assets/images/linkedin_logo.png" alt="" aria-hidden="true" />
+          <span class="tooltip">LinkedIn</span>
+          <span class="sr-only">LinkedIn</span>
+        </a>
+        <a class="icon-link" href="https://t.me/geeklord88" target="_blank" rel="noopener" aria-label="Message me on Telegram">
+          <img src="/assets/images/tele_trans_white.webp" alt="" aria-hidden="true" />
+          <span class="tooltip">Telegram</span>
+          <span class="sr-only">Telegram</span>
+        </a>
+      </div>
+    </section>
+  </footer>
+  <script type="module" src="/assets/js/about.js"></script>
+  <script src="/assets/js/page-transitions.js"></script>
 </body>
 </html>

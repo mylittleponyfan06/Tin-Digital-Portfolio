@@ -46,7 +46,10 @@ export default async function GamesPage() {
               "Supabase Realtime for lobby and round updates.",
               "Room to grow into more games, friends, and private tools later.",
             ].map((item) => (
-              <div key={item} className="rounded-[1.4rem] border border-white/10 bg-white/5 p-4 text-sm leading-7 text-slate-300">
+              <div
+                key={item}
+                className="rounded-[1.4rem] border border-white/10 bg-white/5 p-4 text-sm leading-7 text-slate-300"
+              >
                 {item}
               </div>
             ))}
@@ -76,7 +79,8 @@ export default async function GamesPage() {
                   <div>
                     <p className="text-white">{entry.display_name}</p>
                     <p className="text-sm text-slate-300">
-                      {entry.rounds_played} rounds · {entry.crew_wins} crew wins · {entry.imposter_wins} imposter wins
+                      {entry.rounds_played} rounds / {entry.crew_wins} crew wins /{" "}
+                      {entry.imposter_wins} imposter wins
                     </p>
                   </div>
                   <span className="rounded-full bg-white/10 px-3 py-1 text-sm text-slate-100">
