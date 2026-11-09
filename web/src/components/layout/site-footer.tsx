@@ -10,7 +10,7 @@ export function SiteFooter() {
           <p className="font-[family:var(--font-display)] text-xl text-white">{siteConfig.name}</p>
           <p className="max-w-2xl leading-7 text-slate-300/90">{siteConfig.tagline}</p>
           <p className="text-slate-400">
-            Built for Vercel + Supabase first. Home-server integrations stay optional and come later.
+            Built for Vercel with local JSON storage first. Heavier backend integrations can come later.
           </p>
         </div>
 

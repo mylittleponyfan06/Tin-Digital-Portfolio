@@ -22,7 +22,7 @@ export default async function GamesPage() {
           </h1>
           <p className="mt-5 text-lg leading-8 text-slate-300">
             The first game is Imposter: a social bluffing round built for private rooms, short prompts,
-            votes, and realtime feedback. Everything runs on Vercel + Supabase for the initial MVP.
+            votes, and manual room refresh. Everything uses local JSON storage for the initial MVP.
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
             <Link href="/games/imposter" className={cn(buttonStyles())}>
@@ -43,7 +43,7 @@ export default async function GamesPage() {
             {[
               "Fast MVP delivery with clean app structure.",
               "Secure room actions and prompt assignment on the server side.",
-              "Supabase Realtime for lobby and round updates.",
+              "Manual refresh for lobby and round updates.",
               "Room to grow into more games, friends, and private tools later.",
             ].map((item) => (
               <div

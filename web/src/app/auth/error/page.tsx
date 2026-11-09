@@ -18,7 +18,7 @@ export default async function AuthErrorPage({ searchParams }: AuthErrorPageProps
         We could not finish that sign-in flow.
       </h1>
       <p className="mt-4 text-slate-200">
-        {params.message ?? "Try the auth flow again, or check your redirect URLs in Supabase."}
+        {params.message ?? "Try the auth flow again."}
       </p>
     </div>
   );

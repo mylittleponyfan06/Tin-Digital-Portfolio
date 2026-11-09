@@ -1,7 +1,5 @@
 import { z } from "zod";
 
-import type { TableRow } from "@/types/database";
-
 const roomStatusSchema = z.enum([
   "lobby",
   "collecting_clues",
@@ -81,7 +79,10 @@ export const imposterRoomSnapshotSchema = z.object({
 
 export type ImposterRoomSnapshot = z.infer<typeof imposterRoomSnapshotSchema>;
 
-export type ImposterLeaderboardEntry = Pick<
-  TableRow<"leaderboard_entries">,
-  "crew_wins" | "display_name" | "imposter_wins" | "rounds_played" | "wins"
->;
+export type ImposterLeaderboardEntry = {
+  crew_wins: number;
+  display_name: string;
+  imposter_wins: number;
+  rounds_played: number;
+  wins: number;
+};

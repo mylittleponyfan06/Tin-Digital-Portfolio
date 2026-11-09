@@ -1,10 +1,11 @@
 "use server";
 
+import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 
-import { getSiteUrl } from "@/lib/env";
-import { createClient } from "@/lib/supabase/server";
+import { sessionCookieName } from "@/lib/auth";
+import { createSession, createUser, deleteSession, signInUser } from "@/lib/local-store";
 import { safeNextPath } from "@/lib/utils";
 
 export type FormState = {
@@ -40,18 +41,21 @@ export async function signInAction(_: FormState, formData: FormData): Promise<Fo
     };
   }
 
-  const supabase = await createClient();
   const nextPath = safeNextPath(parsed.data.next);
-  const { error } = await supabase.auth.signInWithPassword({
-    email: parsed.data.email,
-    password: parsed.data.password,
-  });
+  const result = await signInUser(parsed.data.email, parsed.data.password);
 
-  if (error) {
+  if (result.error || !result.user) {
     return {
-      error: error.message,
+      error: result.error ?? "Could not sign in.",
     };
   }
+
+  (await cookies()).set(sessionCookieName, await createSession(result.user.id), {
+    httpOnly: true,
+    path: "/",
+    sameSite: "lax",
+    secure: process.env.NODE_ENV === "production",
+  });
 
   redirect(nextPath);
 }
@@ -70,40 +74,32 @@ export async function signUpAction(_: FormState, formData: FormData): Promise<Fo
     };
   }
 
-  const supabase = await createClient();
   const nextPath = safeNextPath(parsed.data.next);
-  const { data, error } = await supabase.auth.signUp({
+  const result = await createUser({
+    displayName: parsed.data.displayName,
     email: parsed.data.email,
     password: parsed.data.password,
-    options: {
-      data: {
-        display_name: parsed.data.displayName,
-      },
-      emailRedirectTo: getSiteUrl(
-        `/auth/confirm?next=${encodeURIComponent(nextPath)}`,
-      ),
-    },
   });
 
-  if (error) {
+  if (result.error || !result.user) {
     return {
-      error: error.message,
+      error: result.error ?? "Could not sign up.",
     };
   }
 
-  if (data.session) {
-    redirect(nextPath);
-  }
+  (await cookies()).set(sessionCookieName, await createSession(result.user.id), {
+    httpOnly: true,
+    path: "/",
+    sameSite: "lax",
+    secure: process.env.NODE_ENV === "production",
+  });
 
-  return {
-    success:
-      "Account created. Check your email to confirm the account, then come back and sign in.",
-  };
+  redirect(nextPath);
 }
 
 export async function signOutAction() {
-  const supabase = await createClient();
-
-  await supabase.auth.signOut();
+  const cookieStore = await cookies();
+  await deleteSession(cookieStore.get(sessionCookieName)?.value);
+  cookieStore.delete(sessionCookieName);
   redirect("/");
 }

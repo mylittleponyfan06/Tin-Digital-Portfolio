@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useTransition } from "react";
+import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 
 import {
@@ -11,7 +11,6 @@ import {
   toggleReadyAction,
 } from "@/lib/actions/imposter";
 import type { ImposterRoomSnapshot } from "@/lib/imposter/types";
-import { createClient } from "@/lib/supabase/browser";
 import { buttonStyles, cn } from "@/lib/utils";
 
 type ImposterRoomClientProps = {
@@ -39,63 +38,6 @@ export function ImposterRoomClient({ snapshot }: ImposterRoomClientProps) {
   const hasVoted =
     currentRound?.votes.some((vote) => vote.voterPlayerId === snapshot.currentPlayerId) ?? false;
   const roomPath = `/games/imposter/rooms/${snapshot.room.code}`;
-  const roundId = currentRound?.id;
-
-  useEffect(() => {
-    const supabase = createClient();
-    const refresh = () => {
-      startTransition(() => {
-        router.refresh();
-      });
-    };
-
-    const channel = supabase
-      .channel(`imposter-room-${snapshot.room.id}`)
-      .on(
-        "postgres_changes",
-        { event: "*", filter: `id=eq.${snapshot.room.id}`, schema: "public", table: "rooms" },
-        refresh,
-      )
-      .on(
-        "postgres_changes",
-        {
-          event: "*",
-          filter: `room_id=eq.${snapshot.room.id}`,
-          schema: "public",
-          table: "room_players",
-        },
-        refresh,
-      )
-      .on(
-        "postgres_changes",
-        {
-          event: "*",
-          filter: `room_id=eq.${snapshot.room.id}`,
-          schema: "public",
-          table: "rounds",
-        },
-        refresh,
-      );
-
-    if (roundId) {
-      channel.on(
-        "postgres_changes",
-        {
-          event: "*",
-          filter: `round_id=eq.${roundId}`,
-          schema: "public",
-          table: "votes",
-        },
-        refresh,
-      );
-    }
-
-    channel.subscribe();
-
-    return () => {
-      void supabase.removeChannel(channel);
-    };
-  }, [roundId, router, snapshot.room.id]);
 
   if (!currentPlayer) {
     return (
@@ -149,6 +91,15 @@ export function ImposterRoomClient({ snapshot }: ImposterRoomClientProps) {
             </div>
 
             <div className="flex flex-wrap gap-2">
+              <button
+                className={cn(buttonStyles({ size: "sm", variant: "ghost" }))}
+                disabled={isPending}
+                onClick={() => startTransition(() => router.refresh())}
+                type="button"
+              >
+                Refresh
+              </button>
+
               <button
                 className={cn(buttonStyles({ size: "sm", variant: "secondary" }))}
                 disabled={isPending}

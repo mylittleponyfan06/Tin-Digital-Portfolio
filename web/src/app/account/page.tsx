@@ -1,6 +1,6 @@
 import { ProfileForm } from "@/components/account/profile-form";
 import { requireUser } from "@/lib/auth";
-import { createClient } from "@/lib/supabase/server";
+import { getProfile, getUserLeaderboard } from "@/lib/local-store";
 import { formatDate } from "@/lib/utils";
 
 export const metadata = {
@@ -9,31 +9,17 @@ export const metadata = {
 
 export default async function AccountPage() {
   const user = await requireUser("/account");
-  const supabase = await createClient();
-
-  const [{ data: profile }, { data: leaderboard }] = await Promise.all([
-    supabase
-      .from("profiles")
-      .select("bio, created_at, display_name, username")
-      .eq("id", user.id)
-      .maybeSingle(),
-    supabase
-      .from("leaderboard_entries")
-      .select("crew_wins, imposter_wins, rounds_played, wins")
-      .eq("game_slug", "imposter")
-      .eq("user_id", user.id)
-      .maybeSingle(),
-  ]);
+  const [profile, leaderboard] = await Promise.all([getProfile(user.id), getUserLeaderboard(user.id)]);
 
   return (
     <div className="grid gap-6 lg:grid-cols-[0.85fr,1.15fr]">
       <section className="rounded-[2rem] border border-white/15 bg-[rgba(13,18,31,0.82)] p-6">
         <p className="text-sm uppercase tracking-[0.24em] text-[var(--accent)]">Dashboard</p>
         <h1 className="mt-3 font-[family:var(--font-display)] text-4xl text-white">
-          {profile?.display_name ?? user.email}
+          {profile?.displayName ?? user.email}
         </h1>
         <p className="mt-4 text-sm leading-7 text-slate-300">
-          Signed in as {user.email}. Account created {formatDate(profile?.created_at)}.
+          Signed in as {user.email}. Account created {formatDate(profile?.createdAt)}.
         </p>
 
         <div className="mt-6 grid gap-4 sm:grid-cols-2">
@@ -58,7 +44,7 @@ export default async function AccountPage() {
 
       <ProfileForm
         bio={profile?.bio}
-        displayName={profile?.display_name}
+        displayName={profile?.displayName}
         username={profile?.username}
       />
     </div>

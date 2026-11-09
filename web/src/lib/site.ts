@@ -6,7 +6,7 @@ export const siteConfig = {
   location: "Singapore",
   name: "Tristin Sim",
   tagline:
-    "A whimsical portfolio evolving into a realtime multiplayer web app on Next.js and Supabase.",
+    "A whimsical portfolio evolving into a small multiplayer web app on Next.js.",
 } as const;
 
 export const navigationItems = [
@@ -22,8 +22,8 @@ export const featuredProjects = [
     href: "/games/imposter",
     kind: "Realtime Game",
     summary:
-      "A Jackbox-style browser party game built for phones and laptops with rooms, prompts, voting, and Supabase Realtime.",
-    tags: ["Next.js", "Supabase Realtime", "Vercel"],
+      "A Jackbox-style browser party game built for phones and laptops with rooms, prompts, voting, and local JSON storage.",
+    tags: ["Next.js", "Local JSON", "Vercel"],
     title: "Imposter",
   },
   {
@@ -79,7 +79,7 @@ export const portfolioProjects = [
 
 export const skillGroups = [
   {
-    items: ["Next.js", "TypeScript", "React", "Tailwind CSS", "Supabase", "SQL"],
+    items: ["Next.js", "TypeScript", "React", "Tailwind CSS", "Local JSON"],
     title: "Build",
   },
   {

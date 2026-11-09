@@ -5,7 +5,15 @@ import { redirect } from "next/navigation";
 import { z } from "zod";
 
 import { requireUser } from "@/lib/auth";
-import { createClient } from "@/lib/supabase/server";
+import {
+  castVote,
+  createRoom,
+  joinRoom,
+  leaveRoom,
+  setReady,
+  startRound,
+  submitClue,
+} from "@/lib/local-store";
 import { normalizeRoomCode } from "@/lib/utils";
 
 export type RoomFormState = {
@@ -45,32 +53,21 @@ export async function createRoomAction(
   _: RoomFormState,
   formData: FormData,
 ): Promise<RoomFormState> {
-  await requireUser("/games/imposter");
+  const user = await requireUser("/games/imposter");
   const parsedName = displayNameSchema.safeParse(formData.get("displayName"));
 
   if (!parsedName.success) {
     return { error: parsedName.error.issues[0]?.message };
   }
 
-  const supabase = await createClient();
-  const { data, error } = await supabase.rpc("create_imposter_room", {
-    p_display_name: parsedName.data,
-  });
-
-  if (error || !data?.[0]) {
-    return {
-      error: error?.message ?? "Could not create a room.",
-    };
-  }
-
-  redirect(roomPath(data[0].room_code));
+  redirect(roomPath(await createRoom(user, parsedName.data)));
 }
 
 export async function joinRoomAction(
   _: RoomFormState,
   formData: FormData,
 ): Promise<RoomFormState> {
-  await requireUser("/games/imposter");
+  const user = await requireUser("/games/imposter");
   const parsed = z
     .object({
       displayName: displayNameSchema,
@@ -87,36 +84,26 @@ export async function joinRoomAction(
     };
   }
 
-  const supabase = await createClient();
-  const { data, error } = await supabase.rpc("join_imposter_room", {
-    p_display_name: parsed.data.displayName,
-    p_room_code: parsed.data.roomCode,
-  });
-
-  if (error || !data?.[0]) {
+  const result = await joinRoom(user, parsed.data.roomCode, parsed.data.displayName);
+  if (result.error || !result.code) {
     return {
-      error: error?.message ?? "Could not join the room.",
+      error: result.error ?? "Could not join the room.",
     };
   }
 
-  redirect(roomPath(data[0].room_code));
+  redirect(roomPath(result.code));
 }
 
 export async function toggleReadyAction(input: {
   isReady: boolean;
   roomCode: string;
 }): Promise<ActionResult> {
-  await requireUser(roomPath(input.roomCode));
-
-  const supabase = await createClient();
-  const { error } = await supabase.rpc("set_imposter_ready", {
-    p_ready: input.isReady,
-    p_room_code: normalizeRoomCode(input.roomCode),
-  });
+  const user = await requireUser(roomPath(input.roomCode));
+  const error = await setReady(user, input.roomCode, input.isReady);
 
   if (error) {
     return {
-      error: error.message,
+      error,
     };
   }
 
@@ -127,16 +114,12 @@ export async function toggleReadyAction(input: {
 export async function startRoundAction(input: {
   roomCode: string;
 }): Promise<ActionResult> {
-  await requireUser(roomPath(input.roomCode));
-
-  const supabase = await createClient();
-  const { error } = await supabase.rpc("start_imposter_round", {
-    p_room_code: normalizeRoomCode(input.roomCode),
-  });
+  const user = await requireUser(roomPath(input.roomCode));
+  const error = await startRound(user, input.roomCode);
 
   if (error) {
     return {
-      error: error.message,
+      error,
     };
   }
 
@@ -149,7 +132,7 @@ export async function submitClueAction(input: {
   clue: string;
   roomCode: string;
 }): Promise<ActionResult> {
-  await requireUser(roomPath(input.roomCode));
+  const user = await requireUser(roomPath(input.roomCode));
   const parsed = clueSchema.safeParse(input.clue);
 
   if (!parsed.success) {
@@ -158,15 +141,11 @@ export async function submitClueAction(input: {
     };
   }
 
-  const supabase = await createClient();
-  const { error } = await supabase.rpc("submit_imposter_clue", {
-    p_clue: parsed.data,
-    p_room_code: normalizeRoomCode(input.roomCode),
-  });
+  const error = await submitClue(user, input.roomCode, parsed.data);
 
   if (error) {
     return {
-      error: error.message,
+      error,
     };
   }
 
@@ -178,7 +157,7 @@ export async function castVoteAction(input: {
   roomCode: string;
   targetPlayerId: string;
 }): Promise<ActionResult> {
-  await requireUser(roomPath(input.roomCode));
+  const user = await requireUser(roomPath(input.roomCode));
   const parsed = z
     .object({
       roomCode: roomCodeSchema,
@@ -195,15 +174,11 @@ export async function castVoteAction(input: {
     };
   }
 
-  const supabase = await createClient();
-  const { error } = await supabase.rpc("cast_imposter_vote", {
-    p_room_code: parsed.data.roomCode,
-    p_target_room_player_id: parsed.data.targetPlayerId,
-  });
+  const error = await castVote(user, parsed.data.roomCode, parsed.data.targetPlayerId);
 
   if (error) {
     return {
-      error: error.message,
+      error,
     };
   }
 
@@ -216,18 +191,8 @@ export async function castVoteAction(input: {
 export async function leaveRoomAction(input: {
   roomCode: string;
 }): Promise<ActionResult> {
-  await requireUser(roomPath(input.roomCode));
-
-  const supabase = await createClient();
-  const { error } = await supabase.rpc("leave_imposter_room", {
-    p_room_code: normalizeRoomCode(input.roomCode),
-  });
-
-  if (error) {
-    return {
-      error: error.message,
-    };
-  }
+  const user = await requireUser(roomPath(input.roomCode));
+  await leaveRoom(user, input.roomCode);
 
   revalidatePath("/games/imposter");
   return {

@@ -19,8 +19,8 @@ export default async function HomePage() {
               {siteConfig.name} is evolving from a static portfolio into a personal game platform.
             </h1>
             <p className="max-w-2xl text-lg leading-8 text-slate-300">
-              The portfolio stays the front door. Behind it sits a clean Next.js + Supabase stack for
-              realtime multiplayer games, private tools, and future friend features.
+              The portfolio stays the front door. Behind it sits a clean Next.js app with a tiny local
+              data store for games, private tools, and future friend features.
             </p>
           </div>
 
@@ -44,7 +44,7 @@ export default async function HomePage() {
           <div className="grid gap-4 sm:grid-cols-2">
             <div className="rounded-[1.8rem] border border-white/10 bg-white/5 p-5">
               <p className="text-xs uppercase tracking-[0.24em] text-slate-400">Stack</p>
-              <p className="mt-3 text-2xl text-white">Next.js 16 + Supabase</p>
+              <p className="mt-3 text-2xl text-white">Next.js 16 + local JSON</p>
             </div>
             <div className="rounded-[1.8rem] border border-white/10 bg-white/5 p-5">
               <p className="text-xs uppercase tracking-[0.24em] text-slate-400">Deploy</p>

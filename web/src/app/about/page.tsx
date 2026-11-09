@@ -24,7 +24,7 @@ export default function AboutPage() {
           </div>
           <div className="rounded-[1.6rem] border border-white/10 bg-white/5 p-4">
             <p className="text-xs uppercase tracking-[0.2em] text-slate-400">Current stack</p>
-            <p className="mt-2 text-lg text-white">Next.js, Supabase, TypeScript</p>
+            <p className="mt-2 text-lg text-white">Next.js, TypeScript, local JSON</p>
           </div>
         </div>
       </section>

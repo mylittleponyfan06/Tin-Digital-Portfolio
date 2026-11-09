@@ -1,15 +1,13 @@
 import { redirect } from "next/navigation";
+import { cookies } from "next/headers";
 
-import { createClient } from "@/lib/supabase/server";
+import { getUserByToken } from "@/lib/local-store";
 import { safeNextPath } from "@/lib/utils";
 
-export async function getCurrentUser() {
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+export const sessionCookieName = "local_session";
 
-  return user;
+export async function getCurrentUser() {
+  return getUserByToken((await cookies()).get(sessionCookieName)?.value);
 }
 
 export async function requireUser(nextPath = "/account") {

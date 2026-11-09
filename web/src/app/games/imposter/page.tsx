@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ImposterEntryForms } from "@/components/games/imposter/imposter-entry-forms";
 import { getCurrentUser } from "@/lib/auth";
 import { getImposterLeaderboard } from "@/lib/imposter/queries";
-import { createClient } from "@/lib/supabase/server";
+import { getProfile } from "@/lib/local-store";
 import { buttonStyles, cn } from "@/lib/utils";
 
 export const metadata = {
@@ -12,10 +12,7 @@ export const metadata = {
 
 export default async function ImposterPage() {
   const user = await getCurrentUser();
-  const supabase = await createClient();
-  const profile = user
-    ? await supabase.from("profiles").select("display_name").eq("id", user.id).maybeSingle()
-    : null;
+  const profile = user ? await getProfile(user.id) : null;
   const leaderboard = user ? await getImposterLeaderboard(8) : [];
 
   return (
@@ -65,7 +62,7 @@ export default async function ImposterPage() {
       </section>
 
       {user ? (
-        <ImposterEntryForms defaultDisplayName={profile?.data?.display_name ?? user.email ?? ""} />
+        <ImposterEntryForms defaultDisplayName={profile?.displayName ?? user.email ?? ""} />
       ) : (
         <section className="rounded-[2rem] border border-white/15 bg-[rgba(13,18,31,0.82)] p-6">
           <p className="text-lg leading-8 text-slate-300">

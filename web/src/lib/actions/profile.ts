@@ -4,7 +4,7 @@ import { revalidatePath } from "next/cache";
 import { z } from "zod";
 
 import { requireUser } from "@/lib/auth";
-import { createClient } from "@/lib/supabase/server";
+import { updateProfile } from "@/lib/local-store";
 
 export type ProfileFormState = {
   error?: string;
@@ -45,19 +45,11 @@ export async function updateProfileAction(
     };
   }
 
-  const supabase = await createClient();
-  const { error } = await supabase.from("profiles").upsert({
+  await updateProfile(user, {
     bio: parsed.data.bio,
-    display_name: parsed.data.displayName,
-    id: user.id,
+    displayName: parsed.data.displayName,
     username: parsed.data.username,
   });
-
-  if (error) {
-    return {
-      error: error.message,
-    };
-  }
 
   revalidatePath("/account");
   revalidatePath("/games/imposter");
